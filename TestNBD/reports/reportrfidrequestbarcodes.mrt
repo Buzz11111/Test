@@ -1,0 +1,453 @@
+{
+  "ReportVersion": "2019.1.1.0",
+  "ReportGuid": "312ff04e153c47d2be09ea1c36fba5fa",
+  "ReportName": "Report",
+  "ReportAlias": "Report",
+  "ReportCreated": "/Date(86400000+0000)/",
+  "ReportChanged": "/Date(1574433441964+0000)/",
+  "EngineVersion": "EngineV2",
+  "CalculationMode": "Interpretation",
+  "Script": "using System;\r\nusing System.Drawing;\r\nusing System.Windows.Forms;\r\nusing System.Data;\r\nusing Stimulsoft.Controls;\r\nusing Stimulsoft.Base.Drawing;\r\nusing Stimulsoft.Report;\r\nusing Stimulsoft.Report.Dialogs;\r\nusing Stimulsoft.Report.Components;\r\n\r\nnamespace Reports\r\n{\r\n    public class Report : Stimulsoft.Report.StiReport\r\n    {\r\n        public Report()        {\r\n            this.InitializeComponent();\r\n        }\r\n\r\n        #region StiReport Designer generated code - do not modify\r\n\t\t#endregion StiReport Designer generated code - do not modify\r\n    }\r\n}\r\n",
+  "ReferencedAssemblies": {
+    "0": "System.Dll",
+    "1": "System.Drawing.Dll",
+    "2": "System.Windows.Forms.Dll",
+    "3": "System.Data.Dll",
+    "4": "System.Xml.Dll",
+    "5": "Stimulsoft.Controls.Dll",
+    "6": "Stimulsoft.Base.Dll",
+    "7": "Stimulsoft.Report.Dll"
+  },
+  "Dictionary": {
+    "Variables": {
+      "0": {
+        "Name": "rfid_request_param",
+        "DialogInfo": {
+          "ItemsInitializationType": "Columns",
+          "KeysColumn": "rfid_request.recid",
+          "ValuesColumn": "rfid_request.recname",
+          "AllowUserValues": false
+        },
+        "Alias": "Наименование пула номеров",
+        "Type": "System.String",
+        "RequestFromUser": true
+      }
+    },
+    "DataSources": {
+      "0": {
+        "Ident": "StiPostgreSQLSource",
+        "Name": "ke_numbers",
+        "Alias": "ke_numbers",
+        "Key": "c96b703f91ac41d8b0b1212ca6440c2d",
+        "Columns": {
+          "0": {
+            "Name": "generate_date",
+            "Index": -1,
+            "NameInSource": "generate_date",
+            "Alias": "generate_date",
+            "Type": "System.DateTime"
+          },
+          "1": {
+            "Name": "issuer",
+            "Index": -1,
+            "NameInSource": "issuer",
+            "Alias": "issuer",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "number_ke",
+            "Index": -1,
+            "NameInSource": "number_ke",
+            "Alias": "number_ke",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "reccode",
+            "Index": -1,
+            "NameInSource": "reccode",
+            "Alias": "reccode",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "reccreated",
+            "Index": -1,
+            "NameInSource": "reccreated",
+            "Alias": "reccreated",
+            "Type": "System.DateTime"
+          },
+          "5": {
+            "Name": "reccreatedby",
+            "Index": -1,
+            "NameInSource": "reccreatedby",
+            "Alias": "reccreatedby",
+            "Type": "System.String"
+          },
+          "6": {
+            "Name": "recdescription",
+            "Index": -1,
+            "NameInSource": "recdescription",
+            "Alias": "recdescription",
+            "Type": "System.String"
+          },
+          "7": {
+            "Name": "recid",
+            "Index": -1,
+            "NameInSource": "recid",
+            "Alias": "recid",
+            "Type": "System.String"
+          },
+          "8": {
+            "Name": "recname",
+            "Index": -1,
+            "NameInSource": "recname",
+            "Alias": "recname",
+            "Type": "System.String"
+          },
+          "9": {
+            "Name": "recstate",
+            "Index": -1,
+            "NameInSource": "recstate",
+            "Alias": "recstate",
+            "Type": "System.Int64"
+          },
+          "10": {
+            "Name": "recstate",
+            "Index": -1,
+            "NameInSource": "recstate",
+            "Alias": "recstate",
+            "Type": "System.Decimal"
+          },
+          "11": {
+            "Name": "recupdated",
+            "Index": -1,
+            "NameInSource": "recupdated",
+            "Alias": "recupdated",
+            "Type": "System.DateTime"
+          },
+          "12": {
+            "Name": "recupdatedby",
+            "Index": -1,
+            "NameInSource": "recupdatedby",
+            "Alias": "recupdatedby",
+            "Type": "System.String"
+          },
+          "13": {
+            "Name": "rfid_request",
+            "Index": -1,
+            "NameInSource": "rfid_request",
+            "Alias": "rfid_request",
+            "Type": "System.String"
+          },
+          "14": {
+            "Name": "status",
+            "Index": -1,
+            "NameInSource": "status",
+            "Alias": "status",
+            "Type": "System.String"
+          }
+        },
+        "NameInSource": "PostgreSQL",
+        "SqlCommand": "select * from ke_numbers\r\nwhere recstate = 1"
+      },
+      "1": {
+        "Ident": "StiPostgreSQLSource",
+        "Name": "rdev___sysfiles",
+        "Alias": "rdev___sysfiles",
+        "Key": "951625a41fca40cfaa6c2558fefdb375",
+        "Columns": {
+          "0": {
+            "Name": "body",
+            "Index": -1,
+            "NameInSource": "body",
+            "Alias": "body",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "columnname",
+            "Index": -1,
+            "NameInSource": "columnname",
+            "Alias": "columnname",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "description",
+            "Index": -1,
+            "NameInSource": "description",
+            "Alias": "description",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "entityid",
+            "Index": -1,
+            "NameInSource": "entityid",
+            "Alias": "entityid",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "entityname",
+            "Index": -1,
+            "NameInSource": "entityname",
+            "Alias": "entityname",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "hash",
+            "Index": -1,
+            "NameInSource": "hash",
+            "Alias": "hash",
+            "Type": "System.String"
+          },
+          "6": {
+            "Name": "isactual",
+            "Index": -1,
+            "NameInSource": "isactual",
+            "Alias": "isactual",
+            "Type": "System.String"
+          },
+          "7": {
+            "Name": "reccreated",
+            "Index": -1,
+            "NameInSource": "reccreated",
+            "Alias": "reccreated",
+            "Type": "System.DateTime"
+          },
+          "8": {
+            "Name": "recid",
+            "Index": -1,
+            "NameInSource": "recid",
+            "Alias": "recid",
+            "Type": "System.String"
+          },
+          "9": {
+            "Name": "recname",
+            "Index": -1,
+            "NameInSource": "recname",
+            "Alias": "recname",
+            "Type": "System.String"
+          },
+          "10": {
+            "Name": "recupdated",
+            "Index": -1,
+            "NameInSource": "recupdated",
+            "Alias": "recupdated",
+            "Type": "System.DateTime"
+          }
+        },
+        "NameInSource": "PostgreSQL",
+        "SqlCommand": "select * from rdev___sysfiles"
+      },
+      "2": {
+        "Ident": "StiPostgreSQLSource",
+        "Name": "rfid_request",
+        "Alias": "rfid_request",
+        "Key": "5d8efc54ea3340fc9423d2a08fdee366",
+        "Columns": {
+          "0": {
+            "Name": "barcodes_generated",
+            "Index": -1,
+            "NameInSource": "barcodes_generated",
+            "Alias": "barcodes_generated",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "count",
+            "Index": -1,
+            "NameInSource": "count",
+            "Alias": "count",
+            "Type": "System.Int64"
+          },
+          "2": {
+            "Name": "reccode",
+            "Index": -1,
+            "NameInSource": "reccode",
+            "Alias": "reccode",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "reccreated",
+            "Index": -1,
+            "NameInSource": "reccreated",
+            "Alias": "reccreated",
+            "Type": "System.DateTime"
+          },
+          "4": {
+            "Name": "reccreatedby",
+            "Index": -1,
+            "NameInSource": "reccreatedby",
+            "Alias": "reccreatedby",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "recdescription",
+            "Index": -1,
+            "NameInSource": "recdescription",
+            "Alias": "recdescription",
+            "Type": "System.String"
+          },
+          "6": {
+            "Name": "recid",
+            "Index": -1,
+            "NameInSource": "recid",
+            "Alias": "recid",
+            "Type": "System.String"
+          },
+          "7": {
+            "Name": "recname",
+            "Index": -1,
+            "NameInSource": "recname",
+            "Alias": "recname",
+            "Type": "System.String"
+          },
+          "8": {
+            "Name": "recstate",
+            "Index": -1,
+            "NameInSource": "recstate",
+            "Alias": "recstate",
+            "Type": "System.Int64"
+          },
+          "9": {
+            "Name": "recupdated",
+            "Index": -1,
+            "NameInSource": "recupdated",
+            "Alias": "recupdated",
+            "Type": "System.DateTime"
+          },
+          "10": {
+            "Name": "recupdatedby",
+            "Index": -1,
+            "NameInSource": "recupdatedby",
+            "Alias": "recupdatedby",
+            "Type": "System.String"
+          },
+          "11": {
+            "Name": "requestor_id",
+            "Index": -1,
+            "NameInSource": "requestor_id",
+            "Alias": "requestor_id",
+            "Type": "System.String"
+          },
+          "12": {
+            "Name": "rfid_request_status",
+            "Index": -1,
+            "NameInSource": "rfid_request_status",
+            "Alias": "rfid_request_status",
+            "Type": "System.Int64"
+          }
+        },
+        "NameInSource": "PostgreSQL",
+        "SqlCommand": "select * from rfid_request\r\nwhere recstate = 1"
+      }
+    },
+    "Databases": {
+      "0": {
+        "Ident": "StiPostgreSQLDatabase",
+        "Name": "PostgreSQL",
+        "Alias": "PostgreSQL",
+        "ConnectionStringEncrypted": "w1bZCc1KQ83hFe3YYQQlXsZs9StNTHGd4U2hzE5cJT/GYPXrRlzTieJKuIhqFHc71Xz1q0ZIo9XjFfWEZHR1RsZW2aHmSjGk4hU="
+      }
+    },
+    "Relations": {
+      "0": {
+        "Name": "sysfiles_kenumbers",
+        "ChildColumns": {
+          "0": "entityid"
+        },
+        "ParentColumns": {
+          "0": "recid"
+        },
+        "NameInSource": "sysfiles_kenumbers",
+        "Alias": "sysfiles_kenumbers",
+        "ParentSource": "ke_numbers",
+        "ChildSource": "rdev___sysfiles"
+      },
+      "1": {
+        "Name": "kenumbers_rfidrequest",
+        "ChildColumns": {
+          "0": "rfid_request"
+        },
+        "ParentColumns": {
+          "0": "recid"
+        },
+        "NameInSource": "kenumbers_rfidrequest",
+        "Alias": "kenumbers_rfidrequest",
+        "ParentSource": "rfid_request",
+        "ChildSource": "ke_numbers"
+      }
+    }
+  },
+  "Pages": {
+    "0": {
+      "Ident": "StiPage",
+      "Name": "Page1",
+      "Guid": "8ac6e6ed9f5a440b842b3478cd2df38b",
+      "Interaction": {
+        "Ident": "StiInteraction"
+      },
+      "Border": "All;White;;;1;;;solid:White",
+      "Brush": "solid:White",
+      "Components": {
+        "0": {
+          "Ident": "StiDataBand",
+          "Name": "Datardev___sysfiles",
+          "ClientRectangle": "0,0.4,10.5,1.75",
+          "Interaction": {
+            "Ident": "StiBandInteraction"
+          },
+          "Border": "All;;;None;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiImage",
+              "Name": "Datardev___sysfiles_body",
+              "CanShrink": true,
+              "CanGrow": true,
+              "GrowToHeight": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0.2,0,1.2,1.2",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "HorAlignment": "Center",
+              "VertAlignment": "Center",
+              "Border": ";;;None;;;;solid:Black",
+              "Brush": "solid:",
+              "Stretch": true,
+              "AspectRatio": true,
+              "CanBreak": true,
+              "DataColumn": "rdev___sysfiles.body"
+            }
+          },
+          "DataSourceName": "rdev___sysfiles",
+          "ColumnGaps": 0.14,
+          "ColumnWidth": 1.62,
+          "Columns": 6,
+          "MinRowsInColumn": 6,
+          "Filters": {
+            "0": {
+              "Ident": "StiFilter",
+              "Item": "Expression",
+              "Expression": {
+                "Value": "{ToLowerCase(ToString(rdev___sysfiles.sysfiles_kenumbers.rfid_request)) == ToLowerCase(ToString(rfid_request_param))}"
+              }
+            }
+          }
+        }
+      },
+      "PageWidth": 10.5,
+      "PageHeight": 10.5,
+      "Watermark": {
+        "TextBrush": "solid:50,0,0,0"
+      },
+      "Margins": {
+        "Left": 0.0,
+        "Right": 0.0,
+        "Top": 0.0,
+        "Bottom": 0.0
+      },
+      "ReportUnit": {
+        "Ident": "StiCentimetersUnit"
+      }
+    }
+  }
+}

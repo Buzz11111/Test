@@ -1,0 +1,583 @@
+{
+  "ReportVersion": "2019.1.1.0",
+  "ReportGuid": "73bd9bdd41b5400a90e224d926abf59d",
+  "ReportName": "Report",
+  "ReportAlias": "Report",
+  "ReportCreated": "/Date(1539538084000+0000)/",
+  "ReportChanged": "/Date(1574433468213+0000)/",
+  "EngineVersion": "EngineV2",
+  "CalculationMode": "Interpretation",
+  "Script": "using System;\r\nusing System.Drawing;\r\nusing System.Windows.Forms;\r\nusing System.Data;\r\nusing Stimulsoft.Controls;\r\nusing Stimulsoft.Base.Drawing;\r\nusing Stimulsoft.Report;\r\nusing Stimulsoft.Report.Dialogs;\r\nusing Stimulsoft.Report.Components;\r\n\r\nnamespace Reports\r\n{\r\n    public class Report : Stimulsoft.Report.StiReport\r\n    {\r\n        public Report()        {\r\n            this.InitializeComponent();\r\n        }\r\n\r\n        #region StiReport Designer generated code - do not modify\r\n\t\t#endregion StiReport Designer generated code - do not modify\r\n    }\r\n}\r\n",
+  "ReferencedAssemblies": {
+    "0": "System.Dll",
+    "1": "System.Drawing.Dll",
+    "2": "System.Windows.Forms.Dll",
+    "3": "System.Data.Dll",
+    "4": "System.Xml.Dll",
+    "5": "Stimulsoft.Controls.Dll",
+    "6": "Stimulsoft.Base.Dll",
+    "7": "Stimulsoft.Report.Dll"
+  },
+  "Dictionary": {
+    "Variables": {
+      "0": {
+        "Name": "endDate",
+        "Alias": "Конечная дата",
+        "Type": "System.DateTime",
+        "RequestFromUser": true
+      },
+      "1": {
+        "Name": "startDate",
+        "Alias": "Начальная дата",
+        "Type": "System.DateTime",
+        "RequestFromUser": true
+      },
+      "2": {
+        "Name": "fio",
+        "DialogInfo": {
+          "DateTimeType": "DateAndTime"
+        },
+        "Alias": "ФИО",
+        "Type": "System.String",
+        "RequestFromUser": true
+      }
+    },
+    "DataSources": {
+      "0": {
+        "Ident": "StiPostgreSQLSource",
+        "Name": "rdev___auth_users",
+        "Alias": "rdev___auth_users",
+        "Key": "860b2bda69c34624b71745a5d2fd8ee1",
+        "Columns": {
+          "0": {
+            "Name": "email",
+            "Index": -1,
+            "NameInSource": "email",
+            "Alias": "email",
+            "Type": "System.String"
+          },
+          "1": {
+            "Name": "firstname",
+            "Index": -1,
+            "NameInSource": "firstname",
+            "Alias": "firstname",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "isdisabled",
+            "Index": -1,
+            "NameInSource": "isdisabled",
+            "Alias": "isdisabled",
+            "Type": "System.Boolean"
+          },
+          "3": {
+            "Name": "isemailconfirmed",
+            "Index": -1,
+            "NameInSource": "isemailconfirmed",
+            "Alias": "isemailconfirmed",
+            "Type": "System.Boolean"
+          },
+          "4": {
+            "Name": "lastname",
+            "Index": -1,
+            "NameInSource": "lastname",
+            "Alias": "lastname",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "login",
+            "Index": -1,
+            "NameInSource": "login",
+            "Alias": "login",
+            "Type": "System.String"
+          },
+          "6": {
+            "Name": "passwordhash",
+            "Index": -1,
+            "NameInSource": "passwordhash",
+            "Alias": "passwordhash",
+            "Type": "System.String"
+          },
+          "7": {
+            "Name": "patronymic",
+            "Index": -1,
+            "NameInSource": "patronymic",
+            "Alias": "patronymic",
+            "Type": "System.String"
+          },
+          "8": {
+            "Name": "reccode",
+            "Index": -1,
+            "NameInSource": "reccode",
+            "Alias": "reccode",
+            "Type": "System.String"
+          },
+          "9": {
+            "Name": "reccreated",
+            "Index": -1,
+            "NameInSource": "reccreated",
+            "Alias": "reccreated",
+            "Type": "System.String"
+          },
+          "10": {
+            "Name": "reccreatedby",
+            "Index": -1,
+            "NameInSource": "reccreatedby",
+            "Alias": "reccreatedby",
+            "Type": "System.String"
+          },
+          "11": {
+            "Name": "recdescription",
+            "Index": -1,
+            "NameInSource": "recdescription",
+            "Alias": "recdescription",
+            "Type": "System.String"
+          },
+          "12": {
+            "Name": "recid",
+            "Index": -1,
+            "NameInSource": "recid",
+            "Alias": "recid",
+            "Type": "System.String"
+          },
+          "13": {
+            "Name": "recname",
+            "Index": -1,
+            "NameInSource": "recname",
+            "Alias": "recname",
+            "Type": "System.String"
+          },
+          "14": {
+            "Name": "recstate",
+            "Index": -1,
+            "NameInSource": "recstate",
+            "Alias": "recstate",
+            "Type": "System.Int64"
+          },
+          "15": {
+            "Name": "recupdated",
+            "Index": -1,
+            "NameInSource": "recupdated",
+            "Alias": "recupdated",
+            "Type": "System.String"
+          },
+          "16": {
+            "Name": "recupdatedby",
+            "Index": -1,
+            "NameInSource": "recupdatedby",
+            "Alias": "recupdatedby",
+            "Type": "System.String"
+          },
+          "17": {
+            "Name": "fioColumn",
+            "Index": -1,
+            "NameInSource": "fioColumn",
+            "Alias": "ФИО",
+            "Type": "System.String",
+            "Ident": "Calc",
+            "Expression": "IIF(IsNull(rdev___auth_users,rdev___auth_users.lastname),\"\",rdev___auth_users.lastname  + \" \" ) + IIF(IsNull(rdev___auth_users,rdev___auth_users.firstname),\"\",rdev___auth_users.firstname  + \" \" ) + IIF(IsNull(rdev___auth_users,rdev___auth_users.patronymic),\"\",rdev___auth_users.patronymic)"
+          }
+        },
+        "NameInSource": "RdevPostgesConnection",
+        "SqlCommand": "select * from rdev___auth_users\r\nwhere recstate = 1"
+      },
+      "1": {
+        "Ident": "StiPostgreSQLSource",
+        "Name": "rdev___events_log",
+        "Alias": "rdev___events_log",
+        "Key": "9a8c3d094e4c42df8dafbdf35f8aaab8",
+        "Columns": {
+          "0": {
+            "Name": "eventtype",
+            "Index": -1,
+            "NameInSource": "eventtype",
+            "Alias": "eventtype",
+            "Type": "System.Int64"
+          },
+          "1": {
+            "Name": "message",
+            "Index": -1,
+            "NameInSource": "message",
+            "Alias": "message",
+            "Type": "System.String"
+          },
+          "2": {
+            "Name": "objectid",
+            "Index": -1,
+            "NameInSource": "objectid",
+            "Alias": "objectid",
+            "Type": "System.String"
+          },
+          "3": {
+            "Name": "objectname",
+            "Index": -1,
+            "NameInSource": "objectname",
+            "Alias": "objectname",
+            "Type": "System.String"
+          },
+          "4": {
+            "Name": "reccode",
+            "Index": -1,
+            "NameInSource": "reccode",
+            "Alias": "reccode",
+            "Type": "System.String"
+          },
+          "5": {
+            "Name": "reccreated",
+            "Index": -1,
+            "NameInSource": "reccreated",
+            "Alias": "reccreated",
+            "Type": "System.DateTime"
+          },
+          "6": {
+            "Name": "reccreatedby",
+            "Index": -1,
+            "NameInSource": "reccreatedby",
+            "Alias": "reccreatedby",
+            "Type": "System.String"
+          },
+          "7": {
+            "Name": "recdescription",
+            "Index": -1,
+            "NameInSource": "recdescription",
+            "Alias": "recdescription",
+            "Type": "System.String"
+          },
+          "8": {
+            "Name": "recid",
+            "Index": -1,
+            "NameInSource": "recid",
+            "Alias": "recid",
+            "Type": "System.String"
+          },
+          "9": {
+            "Name": "recname",
+            "Index": -1,
+            "NameInSource": "recname",
+            "Alias": "recname",
+            "Type": "System.String"
+          },
+          "10": {
+            "Name": "recstate",
+            "Index": -1,
+            "NameInSource": "recstate",
+            "Alias": "recstate",
+            "Type": "System.Int64"
+          },
+          "11": {
+            "Name": "recupdated",
+            "Index": -1,
+            "NameInSource": "recupdated",
+            "Alias": "recupdated",
+            "Type": "System.String"
+          },
+          "12": {
+            "Name": "recupdatedby",
+            "Index": -1,
+            "NameInSource": "recupdatedby",
+            "Alias": "recupdatedby",
+            "Type": "System.String"
+          },
+          "13": {
+            "Name": "userid",
+            "Index": -1,
+            "NameInSource": "userid",
+            "Alias": "userid",
+            "Type": "System.String"
+          },
+          "14": {
+            "Name": "armType",
+            "Index": -1,
+            "NameInSource": "armType",
+            "Alias": "АРМ Пользователя",
+            "Type": "System.String",
+            "Ident": "Calc",
+            "Expression": "IIF(rdev___events_log.message.IndexOf(\"установлен на ТС\") >= 0 || rdev___events_log.message.IndexOf(\"передан\") >= 0, \"АРМ Производителя\", \"АРМ Эксплуатанта\")"
+          }
+        },
+        "NameInSource": "RdevPostgesConnection",
+        "SqlCommand": "select * from rdev___events_log\r\nwhere recstate = 1"
+      }
+    },
+    "Databases": {
+      "0": {
+        "Ident": "StiPostgreSQLDatabase",
+        "Name": "RdevPostgesConnection",
+        "Alias": "RdevPostgesConnection",
+        "ConnectionStringEncrypted": "w1bZCc1KQ83hFe3YYQQlXsZs9StNTHGd4U2hzE5cJT/GYPXrRlzTieJKuIhqFHc71Xz1q0ZIo9XjFfWEZHR1RsZW2aHmSjGk4hU="
+      }
+    },
+    "Relations": {
+      "0": {
+        "Name": "rdev___events_log_rdev___auth_users",
+        "ChildColumns": {
+          "0": "userid"
+        },
+        "ParentColumns": {
+          "0": "recid"
+        },
+        "NameInSource": "rdev___events_log_rdev___auth_users",
+        "Alias": "rdev___events_log - rdev___auth_users",
+        "ParentSource": "rdev___auth_users",
+        "ChildSource": "rdev___events_log"
+      }
+    }
+  },
+  "Pages": {
+    "0": {
+      "Ident": "StiPage",
+      "Name": "Page1",
+      "Guid": "843ed880447aa30ab1e505557344c694",
+      "Interaction": {
+        "Ident": "StiInteraction"
+      },
+      "Border": ";;2;;;;;solid:Black",
+      "Brush": "solid:",
+      "Components": {
+        "0": {
+          "Ident": "StiHeaderBand",
+          "Name": "Headerrdev___events_log",
+          "ClientRectangle": "0,0.4,19.01,0.8",
+          "Interaction": {
+            "Ident": "StiInteraction"
+          },
+          "Border": "Bottom;;;;;;;solid:0,0,0",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Headerrdev___events_log_rdev___events_log___rdev___auth_users_firstname",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0,4.8,0.8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Пользователь (ФИО)"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Type": "Expression"
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Headerrdev___events_log_message",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4.8,0,4.8,0.8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "АРМ пользователя "
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Type": "Expression"
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Headerrdev___events_log_reccreated",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "9.6,0,4.8,0.8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Дата выполнения"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Type": "Expression"
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Headerrdev___events_log_objectname",
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "14.4,0,4.6,0.8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "Описание действия"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Font": ";10;Bold;",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "Type": "Expression"
+            }
+          }
+        },
+        "1": {
+          "Ident": "StiDataBand",
+          "Name": "Datardev___events_log",
+          "ClientRectangle": "0,2,19.01,0.8",
+          "Interaction": {
+            "Ident": "StiBandInteraction"
+          },
+          "Border": ";;;;;;;solid:Black",
+          "Brush": "solid:",
+          "Components": {
+            "0": {
+              "Ident": "StiText",
+              "Name": "Datardev___events_log_rdev___events_log_rdev___auth_users_fioColumn",
+              "CanGrow": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "0,0,4.8,0.8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{rdev___events_log.rdev___events_log_rdev___auth_users.fioColumn}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              }
+            },
+            "1": {
+              "Ident": "StiText",
+              "Name": "Datardev___events_log_armType",
+              "CanGrow": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "4.8,0,4.8,0.8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{rdev___events_log.armType}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              }
+            },
+            "2": {
+              "Ident": "StiText",
+              "Name": "Datardev___events_log_reccreated",
+              "CanGrow": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "9.6,0,4.8,0.8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{rdev___events_log.reccreated}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              },
+              "TextFormat": {
+                "Ident": "StiDateFormatService",
+                "StringFormat": "dd.MM.yy"
+              }
+            },
+            "3": {
+              "Ident": "StiText",
+              "Name": "Datardev___events_log_message",
+              "CanGrow": true,
+              "MinSize": "0,0",
+              "MaxSize": "0,0",
+              "ClientRectangle": "14.4,0,4.6,0.8",
+              "Interaction": {
+                "Ident": "StiInteraction"
+              },
+              "Text": {
+                "Value": "{rdev___events_log.message}"
+              },
+              "HorAlignment": "Right",
+              "VertAlignment": "Center",
+              "Border": ";;;;;;;solid:Black",
+              "Brush": "solid:",
+              "TextBrush": "solid:Black",
+              "TextOptions": {
+                "WordWrap": true
+              }
+            }
+          },
+          "DataSourceName": "rdev___events_log",
+          "Filters": {
+            "0": {
+              "Ident": "StiFilter",
+              "Item": "Expression",
+              "Expression": {
+                "Value": "{rdev___events_log.reccreated >= startDate}"
+              }
+            },
+            "1": {
+              "Ident": "StiFilter",
+              "Item": "Expression",
+              "Expression": {
+                "Value": "{rdev___events_log.reccreated <= endDate}"
+              }
+            },
+            "2": {
+              "Ident": "StiFilter",
+              "Item": "Expression",
+              "Expression": {
+                "Value": "{rdev___events_log.rdev___events_log_rdev___auth_users.fioColumn.IndexOf(fio) >= 0}"
+              }
+            }
+          }
+        }
+      },
+      "PageWidth": 21.01,
+      "PageHeight": 29.69,
+      "Watermark": {
+        "TextBrush": "solid:50,0,0,0"
+      },
+      "Margins": {
+        "Left": 1.0,
+        "Right": 1.0,
+        "Top": 1.0,
+        "Bottom": 1.0
+      }
+    }
+  }
+}
