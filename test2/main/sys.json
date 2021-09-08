@@ -1,0 +1,3027 @@
+{
+	"version": "v2019.11.26",
+	"menus": [
+		{
+			"name": "syncContextMenu",
+			"title": "Методы для синхронизации",
+			"hint": "Методы для синхронизации",
+			"typeMenuItem": "Submenu",
+			"submenuItems": [
+				{
+					"name": "fetchMenuItem",
+					"title": "Fetch",
+					"typeMenuItem": "Method",
+					"object": "fetchsync"
+				},
+				{
+					"name": "pullMenuItem",
+					"title": "Pull",
+					"typeMenuItem": "Method",
+					"object": "pullsync"
+				}
+			]
+		},
+		{
+			"name": "rsmev_requestsMenu",
+			"title": "Контекстное меню для rsmev___requests",
+			"typeMenuItem": "Submenu",
+			"submenuItems": [
+				{
+					"name": "actionItem_rsmev_requests_download_xml_selected_request",
+					"title": "Скачать xml запрос",
+					"object": "http://10.10.10.65:5001/api/files/downloadfilefromcolumn/requestsigned/rsmev___requests/xml/${activeRecord.recid}",
+					"typeMenuItem": "Link"
+				},
+				{
+					"name": "actionItem_rsmev_requests_download_xml_selected_response",
+					"title": "Скачать xml ответ",
+					"object": "http://10.10.10.65:5001/api/files/downloadfilefromcolumn/responsexml/rsmev___requests/xml/${activeRecord.recid}",
+					"typeMenuItem": "Link"
+				},
+				{
+					"name": "actionItem_rsmev_requests_open_on_new_page",
+					"title": "Открыть в новом окне",
+					"object": "http://10.10.10.65:5001/tables/rsmev___requests/${activeRecord.recid}",
+					"typeMenuItem": "Link"
+				},
+				{
+					"name": "actionItem_rsmev_requests_endpoint",
+					"title": "Контур",
+					"object": "http://10.10.10.65:5001/smev/settings/endpoints/${activeRecord.endpointid}",
+					"typeMenuItem": "Link"
+				}
+			]
+		},
+		{
+			"name": "rsmev_responsesMenu",
+			"title": "Контекстное меню для rsmev___responses",
+			"typeMenuItem": "Submenu",
+			"submenuItems": [
+				{
+					"name": "actionItem_rsmev_response_download_xml_selected_response",
+					"title": "Скачать xml ответ СМЭВ полностью",
+					"object": "http://10.10.10.65:5001/api/files/downloadfilefromcolumn/originalresponsetext/rsmev___responses/xml/${activeRecord.recid}",
+					"typeMenuItem": "Link"
+				},
+				{
+					"name": "actionItem_rsmev_response_download_xml_response_smev_part",
+					"title": "Скачать содержательную часть ответа СМЭВ",
+					"object": "http://10.10.10.65:5001/api/files/downloadfilefromcolumn/primarycontent/rsmev___responses/xml/${activeRecord.recid}",
+					"typeMenuItem": "Link"
+				},
+				{
+					"name": "actionItem_rsmev_response_open_on_new_page",
+					"title": "Открыть в новом окне",
+					"object": "http://10.10.10.65:5001/tables/rsmev___responses/${activeRecord.recid}",
+					"typeMenuItem": "Link"
+				},
+				{
+					"name": "actionItem_rsmev_response_redirect_to_request",
+					"title": "Перейти к запросу",
+					"object": "http://10.10.10.65:5001/tables/rsmev___requests/${activeRecord.requestid}",
+					"typeMenuItem": "Link"
+				},
+				{
+					"name": "actionItem_rsmev_response_endpoint",
+					"title": "Контур",
+					"object": "http://10.10.10.65:5001/smev/settings/endpoints/${activeRecord.endpointid}",
+					"typeMenuItem": "Link"
+				}
+			]
+		},
+		{
+			"name": "user_certs_menu",
+			"title": "Методы работы с пользовательскими сертификатами",
+			"hint": "Методы работы с пользовательскими сертификатами",
+			"typeMenuItem": "Submenu",
+			"submenuItems": [
+				{
+					"name": "save_user_cert_as_base64_item_menu",
+					"title": "Сохранить сертификат в Base64",
+					"typeMenuItem": "Method",
+					"checkValidation": true,
+					"object": "save_user_cert_as_base64"
+				}
+			]
+		}
+	],
+	"types": [
+		{
+			"name": "Identity",
+			"type": "SysGUID",
+			"visible": false
+		},
+		{
+			"name": "Name",
+			"type": "SysString",
+			"displayName": "Наименование"
+		},
+		{
+			"name": "Code",
+			"type": "SysString",
+			"displayName": "Код"
+		},
+		{
+			"name": "Description",
+			"type": "SysString",
+			"displayName": "Описание"
+		},
+		{
+			"name": "Classifier",
+			"type": "SysRelation",
+			"displayName": "Системный классификатор",
+			"relation": {
+				"table": "RDEV___Classifier",
+				"field": "RecID",
+				"displayField": "RecID"
+			}
+		},
+		{
+			"name": "ClassifierItem",
+			"type": "SysRelation",
+			"displayName": "Карточка системного классификатора",
+			"relation": {
+				"table": "RDEV___ClassifierItem",
+				"field": "RecID",
+				"displayField": "RecName"
+			}
+		},
+		{
+			"name": "AuthUser",
+			"type": "SysRelation",
+			"displayName": "Пользователь",
+			"relation": {
+				"table": "RDEV___Auth_Users",
+				"field": "RecID",
+				"displayField": "RecName"
+			}
+		},
+		{
+			"name": "AuthRole",
+			"type": "SysRelation",
+			"displayName": "Роль",
+			"relation": {
+				"table": "RDEV___Auth_Roles",
+				"field": "RecID",
+				"displayField": "RecName"
+			}
+		},
+		{
+			"name": "AuthGroup",
+			"type": "SysRelation",
+			"displayName": "Группа пользователей",
+			"relation": {
+				"table": "RDEV___Auth_Groups",
+				"field": "RecID",
+				"displayField": "RecName"
+			}
+		},
+		{
+			"name": "ClassiferIdByItem",
+			"type": "SysGUID",
+			"displayName": "Классификатор",
+			"isCalculated": true,
+			"formula": "select \"RDEV___ClassifierItem\".\"ClassifierID\" from \"RDEV___ClassifierItem\"\nwhere \"RDEV___ClassifierItem\".\"RecID\" = \"RDEV___Auth_Object_Access\".\"ObjectId\""
+		},
+		{
+			"name": "SyncHost",
+			"type": "SysString",
+			"displayName": "Хост"
+		},
+		{
+			"name": "SyncTable",
+			"type": "SysString",
+			"displayName": "Таблица"
+		},
+		{
+			"name": "SyncType",
+			"type": "SysString",
+			"displayName": "Тип"
+		},
+		{
+			"name": "SyncMerge",
+			"type": "SysString",
+			"displayName": "Конфликты"
+		},
+		{
+			"name": "SyncPeriod",
+			"type": "SysInt",
+			"displayName": "Период"
+		},
+		{
+			"name": "SyncNewData",
+			"type": "SysInt",
+			"displayName": "Число не синхронизированных записей"
+		},
+		{
+			"name": "SyncLastPull",
+			"type": "SysTimeDate",
+			"displayName": "Дата последнего pull"
+		},
+		{
+			"name": "SyncLastPush",
+			"type": "SysTimeDate",
+			"displayName": "Дата последнего push"
+		},
+		{
+			"name": "endpoint_id",
+			"type": "SysRelation",
+			"displayName": "Контур",
+			"relation": {
+				"table": "rsmev___endpoints",
+				"displayField": "recname"
+			}
+		},
+		{
+			"name": "sign_service_id",
+			"type": "SysRelation",
+			"displayName": "Подпись",
+			"relation": {
+				"table": "rsmev___signservices",
+				"displayField": "recname"
+			}
+		},
+		{
+			"name": "namespace_id",
+			"type": "SysRelation",
+			"displayName": "Namespace",
+			"relation": {
+				"table": "rsmev___namespaces",
+				"displayField": "recname"
+			}
+		},
+		{
+			"name": "request_settings_id",
+			"type": "SysRelation",
+			"displayName": "Настройка ВС",
+			"relation": {
+				"table": "rsmev___requests_settings",
+				"displayField": "recname"
+			}
+		},
+		{
+			"name": "dictionary_id",
+			"type": "SysRelation",
+			"displayName": "Справочник",
+			"relation": {
+				"table": "rsmev___dict",
+				"displayField": "recname"
+			}
+		},
+		{
+			"name": "SignServiceTypeEnum",
+			"type": "SysENUM",
+			"displayName": "Подпись",
+			"enum": [
+				{
+					"id": 0,
+					"value": "Встроенный"
+				},
+				{
+					"id": 1,
+					"value": "Удалённый Redoc"
+				},
+				{
+					"id": 2,
+					"value": "Удалённый Java"
+				}
+			]
+		},
+		{
+			"name": "SmevResponseStatusEnum",
+			"type": "SysENUM",
+			"displayName": "Тип ответа СМЭВ",
+			"enum": [
+				{
+					"id": 0,
+					"value": "Неизвестый"
+				},
+				{
+					"id": 1,
+					"value": "Конечный ответ"
+				},
+				{
+					"id": 2,
+					"value": "Промежуточный ответ"
+				}
+			]
+		},
+		{
+			"name": "EventData",
+			"type": "SysString",
+			"multiple": true,
+			"displayName": "Конфликты"
+		},
+		{
+			"name": "EventType",
+			"type": "SysENUM",
+			"enum": [
+				{
+					"id": 1,
+					"value": "Инфо"
+				},
+				{
+					"id": 2,
+					"value": "Отладка"
+				},
+				{
+					"id": 3,
+					"value": "Предупреждение"
+				},
+				{
+					"id": 4,
+					"value": "Ошибка"
+				}
+			]
+		},
+		{
+			"name": "TypeCode",
+			"type": "SysENUM",
+			"enum": [
+				{
+					"id": 10,
+					"value": "js"
+				},
+				{
+					"id": 20,
+					"value": "csharp"
+				},
+				{
+					"id": 30,
+					"value": "sql"
+				}
+			]
+		},
+		{
+			"name": "RepeatAfterSec",
+			"type": "SysNumber",
+			"displayName": "Значение, через которое задачу необходимо повторять, в сек."
+		},
+		{
+			"name": "Enabled",
+			"type": "SysBoolean",
+			"displayName": "Флаг вкл/откл"
+		},
+		{
+			"name": "WishStartDate",
+			"type": "SysTimeDate",
+			"displayName": "Желаемое время выполнения"
+		},
+		{
+			"name": "StartDate",
+			"type": "SysTimeDate",
+			"displayName": "Начало выполнения"
+		},
+		{
+			"name": "EndDate",
+			"type": "SysTimeDate",
+			"displayName": "Завершение выполнения"
+		},
+		{
+			"name": "IsRunning",
+			"type": "SysBoolean",
+			"displayName": "Состояние выполнения, true - выполняется, false - не выполняется"
+		},
+		{
+			"name": "Content",
+			"type": "SysString",
+			"displayName": "Содержимое в текстовом виде"
+		},
+		{
+			"name": "FileId",
+			"type": "SysRelation",
+			"displayName": "Идентификатор файла",
+			"relation": {
+				"table": "RDEV___SysFiles",
+				"field": "RecID",
+				"displayField": "RecName"
+			}
+		},
+		{
+			"name": "aoguid",
+			"type": "SysGUID",
+			"displayName": "Глобальный идентификатор адресообразующего объекта"
+		},
+		{
+			"name": "formalname",
+			"type": "SysString",
+			"displayName": "Название адресообразующего объекта"
+		},
+		{
+			"name": "regioncode",
+			"type": "SysString",
+			"displayName": "Код региона"
+		},
+		{
+			"name": "autocode",
+			"type": "SysString",
+			"displayName": "Код автономии"
+		},
+		{
+			"name": "areacode",
+			"type": "SysString",
+			"displayName": "Код района"
+		},
+		{
+			"name": "citycode",
+			"type": "SysString",
+			"displayName": "Код города"
+		},
+		{
+			"name": "ctarcode",
+			"type": "SysString",
+			"displayName": "Код внутригородского района"
+		},
+		{
+			"name": "placecode",
+			"type": "SysString",
+			"displayName": "Код населенного пункта"
+		},
+		{
+			"name": "plancode",
+			"type": "SysString",
+			"displayName": "Код элемента планировочной структуры"
+		},
+		{
+			"name": "streetcode",
+			"type": "SysString",
+			"displayName": "Код улицы"
+		},
+		{
+			"name": "extrcode",
+			"type": "SysString",
+			"displayName": "Код дополнительного адресообразующего элемента"
+		},
+		{
+			"name": "sextcode",
+			"type": "SysString",
+			"displayName": "Код подчиненного дополнительного адресообразующего элемента"
+		},
+		{
+			"name": "offname",
+			"type": "SysString",
+			"displayName": "Официальное наименование"
+		},
+		{
+			"name": "postalcode",
+			"type": "SysString",
+			"displayName": "Почтовый индекс"
+		},
+		{
+			"name": "ifnsfl",
+			"type": "SysString",
+			"displayName": "Код ИФНС ФЛ"
+		},
+		{
+			"name": "terrifnsfl",
+			"type": "SysString",
+			"displayName": "Код территориального участка ИФНС ФЛ"
+		},
+		{
+			"name": "ifnsul",
+			"type": "SysString",
+			"displayName": "Код ИФНС ЮЛ"
+		},
+		{
+			"name": "terrifnsul",
+			"type": "SysString",
+			"displayName": "Код территориального участка ИФНС ЮЛ"
+		},
+		{
+			"name": "okato",
+			"type": "SysString",
+			"displayName": "ОКАТО"
+		},
+		{
+			"name": "oktmo",
+			"type": "SysString",
+			"displayName": "ОКТМО"
+		},
+		{
+			"name": "updatedate",
+			"type": "SysTimeDate",
+			"displayName": "Дата  внесения (обновления) записи"
+		},
+		{
+			"name": "shortname",
+			"type": "SysString",
+			"displayName": "Тип адресообразующего элемента"
+		},
+		{
+			"name": "aolevel",
+			"type": "SysInt",
+			"displayName": "Уровень адресного объекта"
+		},
+		{
+			"name": "parentguid",
+			"type": "SysGUID",
+			"displayName": "Идентификатор объекта родительского объекта"
+		},
+		{
+			"name": "aoid",
+			"type": "SysGUID",
+			"displayName": "Уникальный идентификатор записи"
+		},
+		{
+			"name": "previd",
+			"type": "SysGUID",
+			"displayName": "Идентификатор записи связывания с предыдущей исторической записью"
+		},
+		{
+			"name": "nextid",
+			"type": "SysGUID",
+			"displayName": "Идентификатор записи  связывания с последующей исторической записью"
+		},
+		{
+			"name": "code",
+			"type": "SysString",
+			"displayName": "Код адресного элемента одной строкой с признаком актуальности из классификационного кода"
+		},
+		{
+			"name": "plaincode",
+			"type": "SysString",
+			"displayName": "Код адресного элемента одной строкой без признака актуальности (последних двух цифр)"
+		},
+		{
+			"name": "actstatus",
+			"type": "SysInt",
+			"displayName": "Статус последней исторической записи в жизненном цикле адресного объекта: 0 – Не последняя, 1 - Последняя"
+		},
+		{
+			"name": "livestatus",
+			"type": "SysInt",
+			"displayName": "Статус актуальности адресного объекта ФИАС на текущую дату"
+		},
+		{
+			"name": "centstatus",
+			"type": "SysInt",
+			"displayName": "Статус центра"
+		},
+		{
+			"name": "operstatus",
+			"type": "SysInt",
+			"displayName": "Статус действия над записью – причина появления записи"
+		},
+		{
+			"name": "currstatus",
+			"type": "SysInt",
+			"displayName": "Статус актуальности КЛАДР 4 (последние две цифры в коде)"
+		},
+		{
+			"name": "startdate",
+			"type": "SysTimeDate",
+			"displayName": "Начало действия записи"
+		},
+		{
+			"name": "enddate",
+			"type": "SysTimeDate",
+			"displayName": "Окончание действия записи"
+		},
+		{
+			"name": "normdoc",
+			"type": "SysString",
+			"displayName": "Внешний ключ на нормативный документ (не используется)"
+		},
+		{
+			"name": "cadnum",
+			"type": "SysString",
+			"displayName": "Кадастровый номер"
+		},
+		{
+			"name": "divtype",
+			"type": "SysInt",
+			"displayName": "Тип деления"
+		},
+		{
+			"name": "fulladdress",
+			"type": "SysString",
+			"displayName": "Полный адрес для адресообразующего объекта"
+		},
+		{
+			"name": "fulladdress_search",
+			"type": "SysString",
+			"displayName": "Поле для полнотекстового поиска"
+		},
+		{
+			"name": "AuthPrivilege",
+			"type": "SysRelation",
+			"displayName": "Привилегия",
+			"relation": {
+				"table": "RDEV___Auth_Privileges",
+				"field": "RecId",
+				"displayField": "RecName"
+			}
+		},
+		{
+			"name": "AuthDataPolicy",
+			"type": "SysRelation",
+			"displayName": "Политика данных",
+			"relation": {
+				"table": "RDEV___Auth_DataPolicies",
+				"field": "RecId",
+				"displayField": "RecName"
+			}
+		},
+		{
+			"name": "SmevNamespace",
+			"type": "SysRelation",
+			"displayName": "Вид сведений (namespace)",
+			"relation": {
+				"table": "rsmev___namespaces",
+				"field": "RecID",
+				"displayField": "RecName"
+			}
+		},
+		{
+			"name": "CertificateUserType",
+			"type": "SysRelation",
+			"displayName": "Пользователь",
+			"relation": {
+				"table": "RDEV___Auth_Users",
+				"field": "RecID",
+				"displayField": "Login"
+			}
+		},
+		{
+			"name": "CertificateFileType",
+			"type": "SysFile",
+			"multiple": false,
+			"fileMask": "*.*",
+			"allowMultiple": false,
+			"allowDownloadZip": false,
+			"allowSign": false,
+			"allowDelete": true,
+			"allowAdd": true
+		},
+		{
+			"name": "CertificateBase64Type",
+			"type": "SysString",
+			"visible": false
+		}
+	],
+	"tables": [
+		{
+			"name": "SysBaseTable",
+			"virtual": "Yes",
+			"fields": [
+				{
+					"name": "recid",
+					"type": "SysGUID",
+					"displayName": "Идентификатор"
+				},
+				{
+					"name": "recname",
+					"type": "SysString",
+					"displayName": "Наименование"
+				},
+				{
+					"name": "reccode",
+					"type": "SysString",
+					"displayName": "Код"
+				},
+				{
+					"name": "recdescription",
+					"type": "SysString",
+					"displayName": "Описание"
+				},
+				{
+					"name": "reccreated",
+					"type": "SysTimeDate",
+					"displayName": "Дата создания",
+					"visible": false
+				},
+				{
+					"name": "recupdated",
+					"type": "SysTimeDate",
+					"displayName": "Дата обновления",
+					"visible": false
+				},
+				{
+					"name": "reccreatedby",
+					"type": "SysString",
+					"readOnly": true,
+					"visible": false
+				},
+				{
+					"name": "recupdatedby",
+					"type": "SysString",
+					"readOnly": true,
+					"visible": false
+				},
+				{
+					"name": "recstate",
+					"type": "SysInt",
+					"readOnly": true,
+					"visible": false
+				}
+			]
+		},
+		{
+			"name": "rdev___sequenses",
+			"virtual": "No",
+			"displayName": "Номерные серии",
+			"description": "Таблица для хранения свойств номерных серий",
+			"fields": [
+				{
+					"name": "pattern",
+					"type": "SysString",
+					"displayName": "Шаблон нумератора"
+				},
+				{
+					"name": "external_url",
+					"type": "SysString",
+					"displayName": "Внешний источник нумератора"
+				},
+				{
+					"name": "current_number",
+					"type": "SysNumber",
+					"displayName": "Текущий номер"
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "recname", "recdescription", "pattern", "external_url" ]
+				}
+			}
+		},
+		{
+			"name": "rsmev___endpoint_version",
+			"virtual": "No",
+			"displayName": "Таблица для хранения версий контуров СМЭВ",
+			"description": "Шлюз - Таблица для хранения версий контуров СМЭВ",
+			"fields": [],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "recname" ]
+				}
+			}
+		},
+		{
+			"name": "rsmev___dict_session_details",
+			"virtual": "No",
+			"displayName": "Таблица для хранения деталей сессии обновления справочника",
+			"description": "Шлюз - Таблица для хранения деталей сессии обновления справочника",
+			"fields": [
+				{
+					"name": "session_id",
+					"type": "SysGUID",
+					"displayName": "Идентификатор сессии"
+				},
+				{
+					"name": "request_id",
+					"type": "SysGUID",
+					"displayName": "Идентификатор запроса"
+				},
+				{
+					"name": "response_id",
+					"type": "SysGUID",
+					"displayName": "Идентификатор ответа"
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "recname", "session_id", "request_id", "response_id" ]
+				}
+			}
+		},
+		{
+			"name": "rsmev___dict_sessions",
+			"virtual": "No",
+			"displayName": "Таблица для хранения сессий для получения файлов справочника",
+			"description": "Шлюз - Таблица для хранения сессий для получения файлов справочника",
+			"fields": [
+				{
+					"name": "endpoint_id",
+					"type": "endpoint_id"
+				},
+				{
+					"name": "chunk_size",
+					"type": "SysInt",
+					"displayName": "Размер пачки записей - по сколько записей хотим получать данные"
+				},
+				{
+					"name": "request_count",
+					"type": "SysInt",
+					"displayName": "Кол-во запросов в этой сесии"
+				},
+				{
+					"name": "is_completed",
+					"type": "SysBoolean",
+					"displayName": "Признак что сессия завершена. true - завершена"
+				},
+				{
+					"name": "is_request_count_made",
+					"type": "SysBoolean",
+					"displayName": "Флаг, показывающий, что сделан первый запрос в сессии - узнать кол-во записей в справочнике"
+				},
+				{
+					"name": "count_request_id",
+					"type": "SysGUID",
+					"displayName": "Идентификатор запроса на кол-во записей requests.recid - может быть null"
+				},
+				{
+					"name": "last_count",
+					"type": "SysInt",
+					"displayName": "Кол-во записей в справочнике - может быть null"
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "reccode", "recname", "endpoint_id", "chunk_size", "is_completed" ]
+				}
+			}
+		},
+		{
+			"name": "rsmev___dict_files",
+			"virtual": "No",
+			"displayName": "Таблица для хранения файлов справочника",
+			"description": "Шлюз - Таблица для хранения файлов справочника",
+			"fields": [
+				{
+					"name": "dictionary_id",
+					"type": "dictionary_id"
+				},
+				{
+					"name": "file_url",
+					"type": "SysString",
+					"displayName": "Ссылка для скачивания файла"
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "recname", "file_url", "dictionary_id" ]
+				}
+			}
+		},
+		{
+			"name": "rsmev___dict",
+			"virtual": "No",
+			"displayName": "Справочники",
+			"description": "Шлюз - Справочники",
+			"fields": [
+				{
+					"name": "endpoint_id",
+					"type": "endpoint_id"
+				},
+				{
+					"name": "version",
+					"type": "SysInt",
+					"displayName": "Ревизия справочника"
+				},
+				{
+					"name": "enable_update",
+					"type": "SysBoolean",
+					"displayName": "Разрешить периодическое обновление"
+				},
+				{
+					"name": "update_period_indays",
+					"type": "SysInt",
+					"displayName": "Период обновления справочника - в днях"
+				},
+				{
+					"name": "chunk_size",
+					"type": "SysInt",
+					"displayName": "Размер пачки записей - по сколько записей хотим получать данные"
+				},
+				{
+					"name": "next_update",
+					"type": "SysTimeDate",
+					"displayName": "Время следующего опроса справочника"
+				},
+				{
+					"name": "is_updating",
+					"type": "SysBoolean",
+					"displayName": "Флаг, показывающий, обновляется ли справочник в данный момент. True - обновляется."
+				},
+				{
+					"name": "last_update",
+					"type": "SysTimeDate",
+					"displayName": "Дата последнего обновления - может быть null"
+				},
+				{
+					"name": "last_update_session_id",
+					"type": "SysGUID",
+					"displayName": "Идентификатор последней сессии, по которому можно найти все запросы/ответы - может быть null"
+				},
+				{
+					"name": "last_completed_session_id",
+					"type": "SysGUID",
+					"displayName": "Идентификатор последней завершённой сессии, по которому можно найти все запросы/ответы - может быть null"
+				},
+				{
+					"name": "last_count",
+					"type": "SysInt",
+					"displayName": "Кол-во записей в справочнике - может быть null"
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "reccode", "recname", "enable_update", "last_update", "last_count" ]
+				}
+			}
+		},
+		{
+			"name": "rsmev___xsd_schemas",
+			"virtual": "No",
+			"displayName": "XSD-схемы запроса",
+			"description": "Шлюз - XSD-схемы запроса",
+			"fields": [
+				{
+					"name": "request_settings_id",
+					"type": "request_settings_id"
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "reccode", "recname", "request_settings_id" ]
+				}
+			}
+		},
+		{
+			"name": "rsmev___template_store",
+			"virtual": "No",
+			"displayName": "Шаблоны",
+			"description": "Шлюз - Шаблоны",
+			"fields": [
+				{
+					"name": "body",
+					"type": "SysBlob",
+					"displayName": "Содержание шаблона (массив байт)"
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "recname" ]
+				}
+			}
+		},
+		{
+			"name": "rsmev___responses",
+			"virtual": "No",
+			"displayName": "Журнал ответов",
+			"description": "Шлюз - Журнал ответов",
+			"fields": [
+				{
+					"name": "is_provider",
+					"type": "SysBoolean",
+					"displayName": "Признак ответа для Поставщика сведений"
+				},
+				{
+					"name": "message_id",
+					"type": "SysGUID",
+					"displayName": "Идентификатор сообщения"
+				},
+				{
+					"name": "original_message_id",
+					"type": "SysGUID",
+					"displayName": "Идентификатор связанного запроса в СМЭВ"
+				},
+				{
+					"name": "response_delivery",
+					"type": "SysTimeDate",
+					"displayName": "Дата ответа от СМЭВ"
+				},
+				{
+					"name": "response_sending",
+					"type": "SysTimeDate",
+					"displayName": "Дата отправки ответа от СМЭВ"
+				},
+				{
+					"name": "response_primary_content",
+					"type": "SysMultiLineString",
+					"displayName": "Содержательная часть ответа СМЭВ"
+				},
+				{
+					"name": "SmevResponseStatusEnum",
+					"type": "SmevResponseStatusEnum"
+				},
+				{
+					"name": "response_raw",
+					"type": "SysBlob",
+					"displayName": "Оригинальный ответ от СМЭВ (массив байт)"
+				},
+				{
+					"name": "response_text",
+					"type": "SysMultiLineString",
+					"displayName": "Ответ СМЭВ полностью"
+				},
+				{
+					"name": "reply_to",
+					"type": "SysString",
+					"displayName": "Адрес - кому нужно ответить на это сообщение"
+				},
+				{
+					"name": "transaction_code",
+					"type": "SysGUID",
+					"displayName": "Код транзакции"
+				},
+				{
+					"name": "namespace_uri",
+					"type": "SysString",
+					"displayName": "Значение атрибута, определяющего тип сообщения (namespace)"
+				},
+				{
+					"name": "mnemonic_sender",
+					"type": "SysString",
+					"displayName": "Мнемоника отправителя сообщений"
+				},
+				{
+					"name": "mnemonic_recipient",
+					"type": "SysString",
+					"displayName": "Мнемоника получателя сообщений"
+				},
+				{
+					"name": "recipient_oktmo",
+					"type": "SysString",
+					"displayName": "OKTMO получателя сообщений"
+				},
+				{
+					"name": "is_parse_completed",
+					"type": "SysBoolean",
+					"displayName": "Признак окончания обработки"
+				},
+				{
+					"name": "response_hash",
+					"type": "SysString",
+					"displayName": "Хэш входящего запроса"
+				},
+				{
+					"name": "is_exported",
+					"type": "SysBoolean",
+					"displayName": "Признак того, что запись с запросом забрали в сторонню Информационную Систему (ИС)"
+				},
+				{
+					"name": "export_date",
+					"type": "SysTimeDate",
+					"displayName": "Дата/время подтверждения экспорта"
+				},
+				{
+					"name": "is_export_confirmed",
+					"type": "SysBoolean",
+					"displayName": "Признак того, что стронняя (ИС) получила запись с запросом"
+				},
+				{
+					"name": "export_confirmed",
+					"type": "SysTimeDate",
+					"displayName": "Дата/время подтверждения экспорта"
+				},
+				{
+					"name": "is_external_confirmed",
+					"type": "SysBoolean",
+					"displayName": "Подтверждение обработки от сторонней ИС"
+				},
+				{
+					"name": "external_confirmed_date",
+					"type": "SysTimeDate",
+					"displayName": "Дата подтверждения обработки от сторонней ИС"
+				},
+				{
+					"name": "is_external_export",
+					"type": "SysBoolean",
+					"displayName": "Экспортировано в стороннюю ИС"
+				},
+				{
+					"name": "external_export_date",
+					"type": "SysTimeDate",
+					"displayName": "Дата экспорта в стороннюю ИС"
+				},
+				{
+					"name": "external_export_cert_subject",
+					"type": "SysString",
+					"displayName": "Кто забрал (владелец сертификата)"
+				},
+				{
+					"name": "external_export_cert_thumb",
+					"type": "SysString",
+					"displayName": "Кто забрал (отпечаток сертификата)"
+				},
+				{
+					"name": "response_content_type",
+					"type": "SysString",
+					"displayName": "Заголовок Content-Type ответа"
+				},
+				{
+					"name": "need_to_ack",
+					"type": "SysBoolean",
+					"displayName": "Флаг - нужно ли отправлять Ack-запрос подтверждения о получении сообщения - храним для истории"
+				},
+				{
+					"name": "ack_sended",
+					"type": "SysBoolean",
+					"displayName": "Флаг об успешной отправке Ack-запроса"
+				},
+				{
+					"name": "is_for_my_request",
+					"type": "SysBoolean",
+					"displayName": "Признак того, что это сообщение для нашего ранее посланного запроса - храним, чтобы сразу видеть это в журнале принятого"
+				},
+				{
+					"name": "cert_subject",
+					"type": "SysString",
+					"displayName": "Владелец сертификата запроса - кто прислал этто сообщение"
+				},
+				{
+					"name": "cert_thumbprint",
+					"type": "SysString",
+					"displayName": "Слепок сертификата запроса - кто прислал этто сообщение"
+				},
+				{
+					"name": "ask_cert_subject",
+					"type": "SysString",
+					"displayName": "Кто подтвердил (владелец сертификата)"
+				},
+				{
+					"name": "ask_cert_thumbprint",
+					"type": "SysString",
+					"displayName": "Кто подтвердил (отпечаток сертификата)"
+				},
+				{
+					"name": "namespace_id",
+					"type": "namespace_id"
+				},
+				{
+					"name": "request_id",
+					"type": "SysGUID",
+					"displayName": "Идентификатор своего же запроса, который ранее отправляли через шлюз (request.recid)"
+				},
+				{
+					"name": "endpoint_id",
+					"type": "endpoint_id"
+				},
+				{
+					"name": "root_element",
+					"type": "SysString",
+					"displayName": "Корневой элемент с данными"
+				},
+				{
+					"name": "is_internal_request",
+					"type": "SysBoolean",
+					"displayName": "Признак внутреннего запроса"
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "recid", "message_id", "original_message_id", "namespace_id", "reccreated", "response_sending", "ack_sended", "endpoint_id" ]
+				},
+				"autoLookup": {
+					"displayName": "",
+					"fields": []
+				},
+				"customGroups": [
+					{
+						"groupName": "EditGroupDetailResponse",
+						"displayName": "Детали запроса",
+						"fields": [ "recid", "message_id", "original_message_id", "namespace", "response_sending", "reccreated", "recupdated", "ack_sended", "endpoint_id" ],
+						"isEnabled": "function() { return true; }"
+					},
+					{
+						"groupName": "EditGroupSmevResponse",
+						"displayName": "Ответ СМЭВ",
+						"fields": [ "response_text", "response_primary_content" ],
+						"isEnabled": "function() { return true; }"
+					},
+					{
+						"groupName": "EditOtherInfoSystem",
+						"displayName": "Сторонняя ИС",
+						"fields": [ "is_external_export", "external_export_date", "external_export_cert_subject", "external_export_cert_thumb", "is_external_confirmed", "external_confirmed_date", "ask_cert_subject", "ask_cert_thumbprint" ],
+						"isEnabled": "function() { return true; }"
+					}
+				]
+			},
+			"menus": [ "rsmev_responsesMenu" ],
+			"methods": [
+				{
+					"name": "actionItem_rsmev_response_redirect_to_request",
+					"displayName": "",
+					"fields": [],
+					"isEnabled": "function() { return (activeRecord.isformyrequest == true);  }"
+				}
+			]
+		},
+		{
+			"name": "rsmev___request_count",
+			"virtual": "No",
+			"displayName": "Кол-во запросов через контур",
+			"description": "Шлюз - Кол-во запросов через контур",
+			"fields": [
+				{
+					"name": "count",
+					"type": "SysInt",
+					"displayName": "Количество запросов отправленных на СМЭВ"
+				},
+				{
+					"name": "endpoint_id",
+					"type": "endpoint_id"
+				}
+			]
+		},
+		{
+			"name": "rsmev___requests",
+			"virtual": "No",
+			"displayName": "Журнал запросов",
+			"description": "Шлюз - Журнал запросов",
+			"fields": [
+				{
+					"name": "request_incoming",
+					"type": "SysString",
+					"displayName": "Входящий запрос"
+				},
+				{
+					"name": "request_id",
+					"type": "SysGUID",
+					"displayName": "Идентификатор в СМЭВ"
+				},
+				{
+					"name": "request_before_sign",
+					"type": "SysString",
+					"displayName": "Текст до подписания"
+				},
+				{
+					"name": "request_signed",
+					"type": "SysMultiLineString",
+					"displayName": "Текст после подписания"
+				},
+				{
+					"name": "is_request_sended",
+					"type": "SysBoolean",
+					"displayName": "Запрос отправлен?"
+				},
+				{
+					"name": "error",
+					"type": "SysString",
+					"displayName": "Сообщение об ошибке"
+				},
+				{
+					"name": "is_response_exists",
+					"type": "SysBoolean",
+					"displayName": "Есть ответ?"
+				},
+				{
+					"name": "response_raw",
+					"type": "SysBlob",
+					"displayName": "Необработанный текст ответа от СМЭВ (байтовый массив)"
+				},
+				{
+					"name": "response",
+					"type": "SysString",
+					"displayName": "Текст ответа от СМЭВ"
+				},
+				{
+					"name": "response_status",
+					"type": "SmevResponseStatusEnum"
+				},
+				{
+					"name": "response_delivery",
+					"type": "SysTimeDate",
+					"displayName": "Дата-время получения ответа"
+				},
+				{
+					"name": "response_sending",
+					"type": "SysTimeDate",
+					"displayName": "Дата-время отправки ответа от СМЭВ"
+				},
+				{
+					"name": "send_try_count",
+					"type": "SysInt",
+					"displayName": "Кол-во попыток отправки запроса"
+				},
+				{
+					"name": "request_response_raw",
+					"type": "SysBlob",
+					"displayName": "Оригинальный ответ СМЭВ для запроса с данными"
+				},
+				{
+					"name": "is_sending",
+					"type": "SysBoolean",
+					"displayName": "Признак, показывает, что данная запись находится в процессе отправки"
+				},
+				{
+					"name": "is_provider_response",
+					"type": "SysBoolean",
+					"displayName": "Признак ответа (для Поставщика сведений)"
+				},
+				{
+					"name": "reply_to_id",
+					"type": "SysGUID",
+					"displayName": "Идентификатор сообщения, на которое мы отвечаем (для Поставщика сведений)"
+				},
+				{
+					"name": "reply_to",
+					"type": "SysString",
+					"displayName": "Идентификатор сообщения, на которое мы отвечаем (для Поставщика сведений)"
+				},
+				{
+					"name": "is_final_request",
+					"type": "SysBoolean",
+					"displayName": "Признак, является ли запрос полностью сформированным для отправки в СМЭВ"
+				},
+				{
+					"name": "node_id",
+					"type": "SysString",
+					"displayName": "Идентификатор очереди"
+				},
+				{
+					"name": "cert_subject",
+					"type": "SysString",
+					"displayName": "Информация о том кто отправил запрос"
+				},
+				{
+					"name": "cert_thumbprint",
+					"type": "SysString",
+					"displayName": "Идентификатор того кто отправил запрос"
+				},
+				{
+					"name": "response_xml",
+					"type": "SysMultiLineString",
+					"displayName": "Текст ответа в виде XML"
+				},
+				{
+					"name": "endpoint_id",
+					"type": "endpoint_id"
+				},
+				{
+					"name": "namespace",
+					"type": "SysString",
+					"displayName": "Значение атрибута, определяющего тип сообщения (namespace)"
+				},
+				{
+					"name": "root_element",
+					"type": "SysString",
+					"displayName": "Значение корневого узла, определяющего тип сообщения (root_element)"
+				},
+				{
+					"name": "last_response_id",
+					"type": "SysGUID",
+					"displayName": "Идентификатор последнего ответа от СМЭВ"
+				},
+				{
+					"name": "is_internal_request",
+					"type": "SysBoolean",
+					"displayName": "Признак внутреннего запроса"
+				},
+				{
+					"name": "namespace_id",
+					"type": "SmevNamespace"
+				},
+				{
+					"name": "external_request_body",
+					"type": "SysBlob",
+					"displayName": "Массив байт внешнего запроса SendRequest, SendResponse"
+				},
+				{
+					"name": "external_request_headers",
+					"type": "SysString",
+					"displayName": "Заголовки внешнего запроса SendRequest, SendResponse"
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "recid", "request_id", "namespace", "reccreated", "recupdated", "is_request_sended", "is_response_exists", "error", "endpoint_id" ]
+				},
+				"autoLookup": {
+					"displayName": "",
+					"fields": []
+				},
+				"customGroups": [
+					{
+						"groupName": "EditGroupDetailRequest",
+						"displayName": "Информация о запросе",
+						"fields": [ "recid", "request_id", "namespace", "reccreated", "recupdated", "is_request_sended", "is_response_exists", "error", "endpoint_id" ]
+					},
+					{
+						"groupName": "EditGroupRequestSmev",
+						"displayName": "Запрос/ответ СМЭВ",
+						"fields": [ "error", "endpoint_id", "request_signed", "response_xml" ],
+						"isEnabled": "function() { return true; }"
+					}
+				]
+			},
+			"menus": [ "rsmev_requestsMenu" ],
+			"methods": [
+				{
+					"name": "actionItem_rsmev_requests_download_xml_selected_response",
+					"displayName": "",
+					"fields": [],
+					"isEnabled": "function() { return (activeRecord.responsexml != null);  }"
+				}
+			]
+		},
+		{
+			"name": "rsmev___namespaces",
+			"virtual": "No",
+			"displayName": "Виды сведений (namespaces)",
+			"description": "Шлюз - Виды сведений (namespaces)",
+			"fields": [
+				{
+					"name": "is_ignore_inproxy_forreciever",
+					"type": "SysBoolean",
+					"displayName": "Не отдавать Получателям ВС"
+				},
+				{
+					"name": "is_ignore_inproxy_forprovider",
+					"type": "SysBoolean",
+					"displayName": "Не отдавать Поставщикам ВС"
+				},
+				{
+					"name": "is_need_to_send_ack",
+					"type": "SysBoolean",
+					"displayName": "Отправлять подтверждение Ack"
+				},
+				{
+					"name": "endpoint_id",
+					"type": "endpoint_id"
+				},
+				{
+					"name": "owner_type_information",
+					"type": "SysString",
+					"displayName": "Владелец ВС"
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "recname", "is_ignore_inproxy_forreciever", "is_ignore_inproxy_forprovider", "is_need_to_send_ack", "endpoint_id", "owner_type_information" ]
+				}
+			}
+		},
+		{
+			"name": "rsmev___files",
+			"virtual": "No",
+			"displayName": "Файлы запросов",
+			"description": "Шлюз - Файлы запросов",
+			"fields": [
+				{
+					"name": "request_id",
+					"type": "SysGUID",
+					"displayName": "Ссылка на поле requests.recid"
+				},
+				{
+					"name": "url",
+					"type": "SysString",
+					"displayName": "Url файла в файловом хранилище"
+				},
+				{
+					"name": "endpoint_id",
+					"type": "endpoint_id"
+				},
+				{
+					"name": "is_provider",
+					"type": "SysBoolean",
+					"displayName": "Признак принадлежности файлов к роли Поставщика сведений"
+				}
+			]
+		},
+		{
+			"name": "rsmev___tasks",
+			"virtual": "No",
+			"displayName": "Фоновые задачи",
+			"description": "Шлюз - Фоновые задачи",
+			"fields": [
+				{
+					"name": "wish_start_time",
+					"type": "SysTimeDate",
+					"displayName": "Желаемое время старта задачи"
+				},
+				{
+					"name": "try_count",
+					"type": "SysInt",
+					"displayName": "Кол-во попыток выполнения задачи"
+				},
+				{
+					"name": "max_try_count",
+					"type": "SysInt",
+					"displayName": "Максимальное кол-во попыток выполнения задачи"
+				},
+				{
+					"name": "is_runned",
+					"type": "SysBoolean",
+					"displayName": "Признак, что задача была выполнена"
+				},
+				{
+					"name": "is_running",
+					"type": "SysBoolean",
+					"displayName": "Признак, что задача сейчас выполняется"
+				},
+				{
+					"name": "repeat_after_sec",
+					"type": "SysInt",
+					"displayName": "Время в секундах, через какое можно выполнить еще одну попытку"
+				},
+				{
+					"name": "error",
+					"type": "SysString",
+					"displayName": "Сообщение об ошибке"
+				},
+				{
+					"name": "start_time",
+					"type": "SysTimeDate",
+					"displayName": "Время начала выполнения"
+				},
+				{
+					"name": "end_time",
+					"type": "SysTimeDate",
+					"displayName": "Время окончания выполнения"
+				},
+				{
+					"name": "job_key",
+					"type": "SysString",
+					"displayName": "Категория фоновой задачи"
+				},
+				{
+					"name": "job_key_id",
+					"type": "SysGUID",
+					"displayName": "Идентификатор, который ссылкается на запись"
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "reccode", "recname", "job_key", "is_runned", "is_running", "try_count", "max_try_count", "error" ]
+				}
+			}
+		},
+		{
+			"name": "rsmev___signservices",
+			"virtual": "No",
+			"displayName": "Сервисы подписания",
+			"description": "Шлюз - сервисы подписания",
+			"fields": [
+				{
+					"name": "service_type_enum",
+					"type": "SignServiceTypeEnum",
+					"displayName": "Тип сервиса подписания: Internal, JavaSignClient, RedocSignClient"
+				},
+				{
+					"name": "url",
+					"type": "SysString",
+					"displayName": "Url сервиса подписания, если он есть"
+				},
+				{
+					"name": "thumbprint",
+					"type": "SysString",
+					"displayName": "Отпечаток сертифаката, которым подписывать. Если сервис подписания поддерживает такую возможность"
+				},
+				{
+					"name": "use_as_default",
+					"type": "SysBoolean",
+					"displayName": "Использовать по-умолчанию"
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "recname", "service_type_enum", "url", "thumbprint", "use_as_default" ]
+				}
+			}
+		},
+		{
+			"name": "rsmev___endpoints",
+			"virtual": "No",
+			"displayName": "Контуры опроса",
+			"description": "Шлюз - контуры опроса",
+			"fields": [
+				{
+					"name": "url",
+					"type": "SysString",
+					"displayName": "Url точки входа в СМЭВ"
+				},
+				{
+					"name": "schema_version",
+					"type": "SysString",
+					"displayName": "Версия схемы точки входа СМЭВ"
+				},
+				{
+					"name": "is_send_request",
+					"type": "SysBoolean",
+					"displayName": "Признак, запускать ли службу отправки запросов"
+				},
+				{
+					"name": "is_get_response_request",
+					"type": "SysBoolean",
+					"displayName": "Признак, запускать ли службу получения ответов - для Получателя ВС"
+				},
+				{
+					"name": "is_get_request_request",
+					"type": "SysBoolean",
+					"displayName": "Признак, запускать ли службу получения ответов - для Поставщика ВС"
+				},
+				{
+					"name": "is_dict_enabled",
+					"type": "SysBoolean",
+					"displayName": "Признак, запускать ли службу работы со справочниками"
+				},
+				{
+					"name": "waiting_timeouts",
+					"type": "SysString",
+					"displayName": "Таймаут ожидания, когда что-то не так - обязательно хотябы одно значение."
+				},
+				{
+					"name": "sign_service_id",
+					"type": "sign_service_id"
+				},
+				{
+					"name": "max_request_limit",
+					"type": "SysInt",
+					"displayName": "Максимальное кол-во запросов, которое может находиться в очереди СМЭВ. 0 - без ограничений"
+				},
+				{
+					"name": "ack_only_self_request",
+					"type": "SysBoolean",
+					"displayName": "Флаг для шлюза указывающий на то, как реагировать на принятые ответы"
+				},
+				{
+					"name": "ignore_files_in_response",
+					"type": "SysBoolean",
+					"displayName": "Флаг, необходимый в режиме 'прокси'. Если установлен, то шлюз не забирает файлы из приходящих ответов."
+				},
+				{
+					"name": "is_throw_ack_notfound",
+					"type": "SysBoolean",
+					"displayName": "Считать ли критической ошибкой при ответе Ack, когда в ответе приходит 'сообщение не найдено' "
+				},
+				{
+					"name": "never_ack",
+					"type": "SysBoolean",
+					"displayName": "Никогда не отвечать Ack на полученный запрос - это будет ответственность сторонней ИС. Необходимо для режима 'прокси'."
+				},
+				{
+					"name": "use_as_default",
+					"type": "SysBoolean",
+					"displayName": "Использовать по-умолчанию, если нельзя определить в какую точку отправлять запросы. Только одна запись может быть помечена таким признаком."
+				},
+				{
+					"name": "ftp_url",
+					"type": "SysString",
+					"displayName": "Адрес FTP СМЭВа"
+				},
+				{
+					"name": "ftp_user",
+					"type": "SysString",
+					"displayName": "Пользователь для доступа к FTP"
+				},
+				{
+					"name": "ftp_pass",
+					"type": "SysString",
+					"displayName": "Пароль для доступа к FTP"
+				},
+				{
+					"name": "get_only_my_data",
+					"type": "SysBoolean",
+					"displayName": "Если true - контур запрашивает ответы только для своих ВС"
+				},
+				{
+					"name": "node_id",
+					"type": "SysString",
+					"displayName": "Признак информационной системы (NodeID)"
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "recname", "url", "use_as_default" ]
+				}
+			}
+		},
+		{
+			"name": "rsmev___requests_settings",
+			"virtual": "No",
+			"displayName": "Настройки запросов шлюза",
+			"description": "Шлюз - настройки запросов",
+			"fields": [
+				{
+					"name": "template_path",
+					"type": "SysString",
+					"displayName": "Путь к Razor-шаблону"
+				},
+				{
+					"name": "content",
+					"type": "SysString",
+					"displayName": "Содержимое Razor-шаблона"
+				},
+				{
+					"name": "template_schema_path",
+					"type": "SysString",
+					"displayName": "JSON-схема запроса"
+				},
+				{
+					"name": "transform_request_path",
+					"type": "SysString",
+					"displayName": "Содержание преобразования, если оно необходимо для преобразования ответа"
+				},
+				{
+					"name": "content_last_requested",
+					"type": "SysTimeDate",
+					"displayName": "Поле используется ASP.NET Core для анализа необходимости рендера поля Content заново."
+				},
+				{
+					"name": "is_system",
+					"type": "SysBoolean",
+					"displayName": "Признак системного шаблона"
+				},
+				{
+					"name": "is_provider_response",
+					"type": "SysBoolean",
+					"displayName": "Признак того, что запрос является ответом Поставщика видов сведений на запрос от кого-то"
+				},
+				{
+					"name": "is_converter",
+					"type": "SysBoolean",
+					"displayName": "Признак того что адаптер является конвертером"
+				},
+				{
+					"name": "is_convert_to_file",
+					"type": "SysBoolean",
+					"displayName": "Признак того, что ответ нужно сконвертировать в файл"
+				},
+				{
+					"name": "file_type",
+					"type": "SysString",
+					"displayName": "Тип файла, в который нужно сконвертировать"
+				},
+				{
+					"name": "report_name",
+					"type": "SysString",
+					"displayName": "Название шаблона c отчётом"
+				},
+				{
+					"name": "ui_schem",
+					"type": "SysString",
+					"displayName": "Json текст-кастомизации формы"
+				},
+				{
+					"name": "endpoint_id",
+					"type": "endpoint_id"
+				},
+				{
+					"name": "namespace_uri",
+					"type": "SysString",
+					"displayName": "Параметр для опроса очереди СМЭВ с учетом фильтрации по ВС - NamespaceURI"
+				},
+				{
+					"name": "root_element",
+					"type": "SysString",
+					"displayName": "Параметр для опроса очереди СМЭВ с учетом фильтрации по ВС - RootElementLocalName"
+				},
+				{
+					"name": "request_xslt",
+					"type": "SysString",
+					"displayName": "Преобразование XSLT для входящих XML-запросов"
+				},
+				{
+					"name": "is_internal_request",
+					"type": "SysBoolean",
+					"displayName": "Признак внутреннего запроса"
+				},
+				{
+					"name": "request_prop",
+					"type": "SysString",
+					"displayName": "Код маршрутизации"
+				},
+				{
+					"name": "request_prop_path",
+					"type": "SysString",
+					"displayName": "Условный путь до кода маршрутизации"
+				},
+				{
+					"name": "internal_route_endpoint_id",
+					"type": "endpoint_id",
+					"displayName": "Контур для фиксированной маршрутизации"
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "recname", "recdescription", "endpoint_id" ]
+				}
+			}
+		},
+		{
+			"name": "rsmev___thumbs",
+			"virtual": "No",
+			"displayName": "Сведения о подписях",
+			"description": "Шлюз - Сведения о подписях",
+			"fields": [],
+			"fieldGroups": {
+				"autoList": {
+					"name": "",
+					"displayName": "",
+					"fields": [ "recname" ]
+				}
+			}
+		},
+		{
+			"name": "RDEV___Classifier",
+			"virtual": "No",
+			"displayName": "Нормативная справочная информация",
+			"description": "Системные классификаторы",
+			"fields": [
+				{
+					"name": "ShortName",
+					"type": "SysString",
+					"displayName": "Сокращенное наименование"
+				},
+				{
+					"name": "ColNameTitle",
+					"type": "SysString",
+					"displayName": "Наименование поля наследуемого объекта"
+				},
+				{
+					"name": "ColCodeTitle",
+					"type": "SysString",
+					"displayName": "Наименование кода наследуемого объекта"
+				},
+				{
+					"name": "ColThreeTitle",
+					"type": "SysString",
+					"displayName": "Наименование дополнительного поля наследуемого объекта"
+				},
+				{
+					"name": "ParentID",
+					"type": "Classifier",
+					"displayName": "Родительский элемент"
+				}
+			]
+		},
+		{
+			"name": "RDEV___ClassifierItem",
+			"virtual": "No",
+			"displayName": "Карточка объекта нормативной справочной информации",
+			"description": "Карточка системного классификатора",
+			"fields": [
+				{
+					"name": "ClassifierID",
+					"type": "Classifier",
+					"displayName": "Системный классификатор"
+				},
+				{
+					"name": "ParentID",
+					"type": "ClassifierItem",
+					"displayName": "Родительский элемент"
+				},
+				{
+					"name": "ColumnThree",
+					"type": "SysString",
+					"displayName": "Дополнительные данные"
+				}
+			]
+		},
+		{
+			"name": "RDEV___Auth_Users",
+			"virtual": "No",
+			"displayName": "Пользователи",
+			"description": "Список пользователей системы",
+			"fields": [
+				{
+					"name": "firstname",
+					"type": "SysString",
+					"displayName": "Имя пользователя"
+				},
+				{
+					"name": "lastname",
+					"type": "SysString",
+					"displayName": "Фамилия пользователя"
+				},
+				{
+					"name": "patronymic",
+					"type": "SysString",
+					"displayName": "Отчество пользователя"
+				},
+				{
+					"name": "Login",
+					"type": "SysString",
+					"displayName": "Логин"
+				},
+				{
+					"name": "PasswordHash",
+					"type": "SysString",
+					"displayName": "Хэш пароля пользователя"
+				},
+				{
+					"name": "Email",
+					"type": "SysString",
+					"displayName": "Email пользователя"
+				},
+				{
+					"name": "IsEmailConfirmed",
+					"type": "SysBoolean",
+					"displayName": "Признак подтверждения email"
+				},
+				{
+					"name": "IsDisabled",
+					"type": "SysBoolean",
+					"displayName": "Признак заблокированного пользователя"
+				},
+				{
+					"name": "PasswordReset",
+					"type": "SysBoolean",
+					"displayName": "Признак сброса пароля"
+				},
+				{
+					"name": "PhoneNumber",
+					"type": "SysString",
+					"displayName": "Номер телефона"
+				}
+			]
+		},
+		{
+			"name": "RDEV___SysCertificates",
+			"virtual": "No",
+			"displayName": "Сертификаты пользователей",
+			"description": "Сертификаты пользователей",
+			"editToolbar": {
+				"visible": "true",
+				"toolbarButtons": [
+					{
+						"name": "sysSave",
+						"displayName": "Сохранить",
+						"visible": "true",
+						"enabled": "true",
+						"actionType": "Method",
+						"object": "save_user_cert_as_base64"
+					}
+				]
+			},
+			"fieldGroups": {
+				"autoList": {
+					"displayName": "",
+					"fields": [ "CertificateUser", "CertificateFile" ]
+				},
+				"autoLookup": {
+					"displayName": "",
+					"fields": [ "CertificateUser", "CertificateFile" ]
+				},
+				"customGroups": [
+					{
+						"groupName": "EditGroup",
+						"displayName": "Сертификат пользователя",
+						"fields": [ "CertificateUser", "CertificateFile" ]
+					}
+				]
+			},
+			"fields": [
+				{
+					"name": "CertificateUser",
+					"type": "CertificateUserType",
+					"validationRules": [
+						{
+							"type": "required",
+							"message": "Необходимо указать пользователя"
+						}
+					]
+				},
+				{
+					"name": "CertificateFile",
+					"type": "CertificateFileType",
+					"displayName": "Сертификат (.cer)",
+					"validationRules": [
+						{
+							"type": "required",
+							"message": "Необходимо приложить файл сертификата"
+						}
+					]
+				},
+				{
+					"name": "CertificateBase64",
+					"type": "CertificateBase64Type"
+				}
+			],
+			"menus": [ "user_certs_menu" ],
+			"methods": [
+				{
+					"name": "save_user_cert_as_base64",
+					"displayName": "Сохранить сертификат в формате Base64",
+					//"checkValidation": true,
+					"isEnabled": "function() { return true; }"
+				}
+			]
+		},
+		{
+			"name": "rdev___auth_users_esia",
+			"displayName": "Пользователи авторизующиеся через ЕСИА",
+			"description": "Список пользователей системы авторизующихся через ЕСИА",
+			"fields": [
+				{
+					"name": "firstname",
+					"type": "SysString",
+					"displayName": "Имя пользователя"
+				},
+				{
+					"name": "lastname",
+					"type": "SysString",
+					"displayName": "Фамилия пользователя"
+				},
+				{
+					"name": "patronymic",
+					"type": "SysString",
+					"displayName": "Отчество пользователя"
+				},
+				{
+					"name": "esiaId",
+					"type": "SysString",
+					"displayName": "Идентификатор ЕСИА"
+				},
+				{
+					"name": "email",
+					"type": "SysString",
+					"displayName": "Email пользователя"
+				},
+				{
+					"name": "phoneNumber",
+					"type": "SysString",
+					"displayName": "Номер телефона"
+				},
+				{
+					"name": "userId",
+					"type": "AuthUser"
+				},
+				{
+					"name": "rawInfo",
+					"type": "SysString",
+					"displayName": "Информация о пользователе ЕСИА"
+				}
+			]
+		},
+		{
+			"name": "RDEV___Auth_Groups",
+			"virtual": "No",
+			"displayName": "Группы пользователей",
+			"description": "Список групп пользователей",
+			"fields": [
+				{
+					"name": "Label",
+					"type": "SysString",
+					"displayName": "Наименование",
+					"readonly": true
+				},
+				{
+					"name": "ParentGroupID",
+					"type": "AuthGroup",
+					"displayName": "Ссылка на родительскую группу",
+					"readonly": true
+				},
+				{
+					"name": "DefaultTable",
+					"type": "SysString",
+					"displayName": "Дефолтная таблица, открывающаяся после авторизации",
+					"readonly": true
+				}
+			],
+			"fieldGroups": {
+				"autoList": {
+					"displayName": "",
+					"fields": [ "recname", "recdescription", "parentgroupid" ]
+				},
+				"customGroups": [
+					{
+						"groupName": "group",
+						"displayName": "Группа",
+						"fields": [ "recname", "recdescription", "parentgroupid" ]
+					}
+				]
+			},
+			// Warning! добавлено для отображения кнопки "Создать группу" в табличном представлении
+			"gridToolbar":{
+				"visible": "true",
+				"toolbarButtons": [
+					{
+						"name": "sysAdd", 
+						"displayName": "Добавить", 
+						"visible": "false", 
+						"enabled": "false", 
+						"color": "primary", 
+						"icon": "plus"
+					},
+					
+					{
+						"name": "create_group", 
+						"displayName": "Создать группу", 
+						"visible": "true", 
+						"enabled": "true", 
+						"icon": "plus", 
+						"actionType": "Form", 
+						"object": "53a73454-0cb9-49b1-80e6-747e92d2d70d"
+					}						
+					
+				]
+			},
+			////////////
+
+			// Warning! добавлено для отображения кнопки "Изменить группу" в карточке групп
+			"editToolbar": {
+				"visible": "true", 
+				"toolbarButtons": [ 
+					{
+						"name": "change_group", 
+						"displayName": "Изменить группу", 
+						"visible": "true", 
+						"enabled": "true", 
+						"color": "primary", 
+						"icon": "plus",
+						"actionType": "Form", 
+						"object": "cfbbdc36-a2db-43b9-83f8-7edf022292ed"
+					},
+					{
+						"name": "sysSave",
+						"displayName": "Сохранить",
+						"visible": "false",
+						"enabled": "false"
+					},
+					{
+						"name": "sysDelete",
+						"displayName": "Удалить",
+						"visible": "false",
+						"enabled": "false"
+					},
+					{
+						"name": "sysCancel",
+						"displayName": "Закрыть",
+						"visible": "false",
+						"enabled": "false"
+					}
+				]
+			}
+			// Warning! добавлено для отображения кнопки "Изменить группу" в карточке групп
+		},
+		{
+			"name": "RDEV___Auth_GroupUser",
+			"virtual": "No",
+			"displayName": "Связь группа - пользователь",
+			"description": "В какую группу входит пользователь",
+			"fields": [
+				{
+					"name": "UserID",
+					"type": "AuthUser",
+					"displayName": "Пользователь"
+				},
+				{
+					"name": "GroupID",
+					"type": "AuthGroup",
+					"displayName": "Группа"
+				}
+			]
+		},
+		{
+			"name": "RDEV___Auth_Roles",
+			"virtual": "No",
+			"displayName": "Роли системы",
+			"description": "Список ролей системы",
+			"fields": []
+		},
+		{
+			"name": "RDEV___Auth_Group_Roles",
+			"virtual": "No",
+			"displayName": "Роли групп в системе",
+			"description": "Связь группы - роли",
+			"fieldGroups": {
+				"autoList": {
+					"displayName": "",
+					"fields": [
+						"RoleId",
+						"GroupId"
+					]
+				}
+			},
+			"fields": [
+				{
+					"name": "RoleId",
+					"type": "AuthRole",
+					"displayName": "Ссылка на идентификатор роли"
+				},
+				{
+					"name": "GroupId",
+					"type": "AuthGroup",
+					"displayName": "Ссылка на группу пользователей"
+				}
+			]
+		},
+		{
+			"name": "RDEV___Auth_Object_Access",
+			"virtual": "No",
+			"displayName": "Информация о доступе к объектам системы",
+			"description": "Информация о доступе к объектам системы (дается на роли, определенные\nв Auth___Roles)",
+			"fieldGroups": {
+				"autoList": {
+					"displayName": "",
+					"fields": [
+						"ObjectType",
+						"ObjectId",
+						"RoleId",
+						"GroupId",
+						"UserId",
+						"AccessLevel"
+					]
+				}
+			},
+			"fields": [
+				{
+					"name": "ObjectType",
+					"type": "SysString",
+					"displayName": "Тип объекта"
+				},
+				{
+					"name": "ClassifierID",
+					"type": "ClassiferIdByItem",
+					"displayName": "Идентификатор классификатора"
+				},
+				{
+					"name": "ObjectId",
+					"type": "ClassifierItem",
+					"displayName": "Идентификатор строки объекта"
+				},
+				{
+					"name": "RoleId",
+					"type": "AuthRole",
+					"displayName": "Ссылка на идентификатор роли"
+				},
+				{
+					"name": "GroupId",
+					"type": "AuthGroup",
+					"displayName": "Ссылка на группу"
+				},
+				{
+					"name": "UserId",
+					"type": "AuthUser",
+					"displayName": "Ссылка на пользователя"
+				},
+				{
+					"name": "AccessLevel",
+					"type": "SysInt",
+					"displayName": "Уровень доступа"
+				}
+			]
+		},
+		{
+			"name": "rdev___sync_nodes",
+			"virtual": "No",
+			"displayName": "Узлы синхронизации (Источники данных)",
+			"description": "Узлы синхронизации (Источники данных)",
+			"fieldGroups": {
+				"autoList": {
+					"displayName": "",
+					"fields": [
+						"SyncHost",
+						"SyncTable",
+						"recdescription",
+						"SyncLastPull"
+					]
+				},
+				"customGroups": [
+					{
+						"groupName": "EditGroup",
+						"displayName": "Узел синхронизации",
+						"fields": [
+							"SyncHost",
+							"SyncTable",
+							"recdescription",
+							"SyncLastPull"
+						]
+					}
+				]
+			},
+			"fields": [
+				{
+					"name": "recdescription",
+					"type": "SysString",
+					"displayName": "Описание",
+					"readOnly": true
+				},
+				{
+					"name": "SyncHost",
+					"type": "SyncHost"
+				},
+				{
+					"name": "SyncTable",
+					"type": "SyncTable"
+				},
+				{
+					"name": "SyncType",
+					"type": "SyncType"
+				},
+				{
+					"name": "SyncMerge",
+					"type": "SyncMerge"
+				},
+				{
+					"name": "SyncPeriod",
+					"type": "SyncPeriod"
+				},
+				{
+					"name": "SyncNewData",
+					"type": "SyncNewData"
+				},
+				{
+					"name": "SyncLastPull",
+					"type": "SyncLastPull",
+					"readOnly": true
+				},
+				{
+					"name": "SyncLastPush",
+					"type": "SyncLastPush"
+				}
+			],
+			"menus": [ "syncContextMenu" ],
+			"methods": [
+				{
+					"name": "pullsync",
+					"displayName": "Pull",
+					"isEnabled": "function() { return  (activeRecord.syncnewdata != null ? +activeRecord.syncnewdata > 0 : false); }",
+					"fields": []
+				}
+			]
+		},
+		{
+			"name": "rdev___events_log",
+			"virtual": "No",
+			"displayName": "Журнал событий",
+			"description": "История операций пользователей, связанных с бизнес-процессами",
+			"fieldGroups": {
+				"autoList": {
+					"displayName": "",
+					"fields": [
+						"userid",
+						"objectname",
+						"objectid",
+						"message",
+						"reccreated",
+						"eventtype",
+						"data"
+					]
+				},
+				"customGroups": [
+					{
+						"groupName": "EditGroup",
+						"displayName": "Событие",
+						"fields": [
+							"userid",
+							"objectname",
+							"objectid",
+							"message",
+							"reccreated",
+							"eventtype",
+							"data"
+						]
+					}
+				]
+			},
+			"fields": [
+				{
+					"name": "userid",
+					"type": "AuthUser",
+					"displayName": "Пользователь"
+				},
+				{
+					"name": "objectname",
+					"type": "SysString",
+					"displayName": "Имя таблицы"
+				},
+				{
+					"name": "objectid",
+					"type": "SysGUID",
+					"displayName": "ID записи"
+				},
+				{
+					"name": "message",
+					"type": "SysString",
+					"displayName": "Сообщение"
+				},
+				{
+					"name": "data",
+					"type": "EventData",
+					"displayName": "JSON объект"
+				},
+				{
+					"name": "RecCreated",
+					"displayName": "Дата события"
+				},
+				{
+					"name": "eventtype",
+					"type": "EventType",
+					"displayName": "Тип события"
+				},
+				{
+					"name": "closed",
+					"type": "SysBoolean",
+					"displayName": "Закрыто"
+				}
+			]
+		},
+		{
+			"name": "rdev___shadow_tasks",
+			"virtual": "No",
+			"displayName": "Фоновые задачи",
+			"description": "Фоновые задачи",
+			"fieldGroups": {
+				"autoList": {
+					"displayName": "",
+					"fields": [
+						"recname",
+						"recdescription",
+						"TypeCode",
+						"RepeatAfterSec",
+						"Enabled",
+						"IsRunning",
+						"Content"
+					]
+				},
+				"customGroups": [
+					{
+						"groupName": "EditGroup",
+						"displayName": "Фоновая задача",
+						"fields": [
+							"recname",
+							"recdescription",
+							"RepeatAfterSec",
+							"Enabled",
+							"IsRunning",
+							"Content"
+						]
+					}
+				]
+			},
+			"fields": [
+				{
+					"name": "TypeCode",
+					"type": "TypeCode"
+				},
+				{
+					"name": "RepeatAfterSec",
+					"type": "RepeatAfterSec"
+				},
+				{
+					"name": "Enabled",
+					"type": "Enabled"
+				},
+				{
+					"name": "WishStartDate",
+					"type": "WishStartDate"
+				},
+				{
+					"name": "StartDate",
+					"type": "StartDate"
+				},
+				{
+					"name": "EndDate",
+					"type": "EndDate"
+				},
+				{
+					"name": "IsRunning",
+					"type": "IsRunning"
+				},
+				{
+					"name": "Content",
+					"type": "Content"
+				}
+			]
+		},
+		{
+			"name": "RDEV___SysFiles",
+			"virtual": "No",
+			"displayName": "Файловое хранилище",
+			"description": "Файловое хранилище",
+			"fields": [
+				{
+					"name": "ColumnName",
+					"type": "SysString",
+					"displayName": "Имя столбца таблицы 'ColumnName'"
+				},
+				{
+					"name": "EntityName",
+					"type": "SysString",
+					"displayName": "Имя столбца таблицы 'EntityName'"
+				},
+				{
+					"name": "EntityId",
+					"type": "SysGUID",
+					"displayName": "Ссылка на RecID из EntityName"
+				},
+				{
+					"name": "Body",
+					"type": "SysBlob",
+					"displayName": "Тело файла - бинарный массив"
+				},
+				{
+					"name": "Hash",
+					"type": "SysString",
+					"displayName": "Контрольная сумма файла - md5-хэш"
+				},
+				{
+					"name": "IsActual",
+					"type": "SysBoolean",
+					"displayName": "Признак актуальности файла"
+				}
+			]
+		},
+		{
+			"name": "RDEV___SysSignFiles",
+			"virtual": "No",
+			"displayName": "Хранилище подписей файлов",
+			"description": "Хранилище подписей файлов",
+			"fields": [
+				{
+					"name": "FileId",
+					"type": "FileId"
+				},
+				{
+					"name": "Hash",
+					"type": "SysString",
+					"displayName": "Значение хэш, по которому была рассчитана подпись (может иметь пустое значение)"
+				},
+				{
+					"name": "Sign",
+					"type": "SysBlob",
+					"displayName": "Цифровая подпись - бинарный массив"
+				},
+				{
+					"name": "IsVerify",
+					"type": "SysBoolean",
+					"displayName": "Флаг валидности подписи"
+				},
+				{
+					"name": "CertSubject",
+					"type": "SysString",
+					"displayName": "Информация о владельце сертификата, на основе которого была рассчитана подпись"
+				},
+				{
+					"name": "CertSerialNumber",
+					"type": "SysString",
+					"displayName": "Серийный номер сертификата"
+				},
+				{
+					"name": "CertThumbprint",
+					"type": "SysString",
+					"displayName": "Отпечаток сертификата"
+				},
+				{
+					"name": "CertValidUntil",
+					"type": "SysTimeDate",
+					"displayName": "Дата окончания действия сертификата"
+				}
+			]
+		},
+		{
+			"name": "rdev___fias_addrobj",
+			"displayName": "Реестр адресообразующих объектов (ФИАС)",
+			"description": "Содержит коды, наименования и типы адресообразующих элементов (регионы; округа; районы (улусы, кужууны); города, поселки городского типа, сельские населенные пункты; элементы планировочной структуры, элементы улично-дорожной сети",
+			"fieldGroups": {
+				"autoList": {
+					"displayName": "",
+					"fields": [
+						"aoguid",
+						"formalname",
+						"regioncode",
+						"autocode",
+						"areacode",
+						"citycode",
+						"ctarcode",
+						"placecode",
+						"plancode",
+						"streetcode",
+						"extrcode",
+						"sextcode",
+						"offname",
+						"postalcode",
+						"ifnsfl",
+						"terrifnsfl",
+						"ifnsul",
+						"terrifnsul",
+						"okato",
+						"oktmo",
+						"updatedate",
+						"shortname",
+						"aolevel",
+						"parentguid",
+						"aoid",
+						"previd",
+						"nextid",
+						"code",
+						"plaincode",
+						"actstatus",
+						"livestatus",
+						"centstatus",
+						"operstatus",
+						"currstatus",
+						"startdate",
+						"enddate",
+						"normdoc",
+						"cadnum",
+						"divtype"
+					]
+				}
+			},
+			"fields": [
+				{
+					"name": "aoguid",
+					"type": "aoguid"
+				},
+				{
+					"name": "formalname",
+					"type": "formalname"
+				},
+				{
+					"name": "regioncode",
+					"type": "regioncode"
+				},
+				{
+					"name": "autocode",
+					"type": "autocode"
+				},
+				{
+					"name": "areacode",
+					"type": "areacode"
+				},
+				{
+					"name": "citycode",
+					"type": "citycode"
+				},
+				{
+					"name": "ctarcode",
+					"type": "ctarcode"
+				},
+				{
+					"name": "placecode",
+					"type": "placecode"
+				},
+				{
+					"name": "plancode",
+					"type": "plancode"
+				},
+				{
+					"name": "streetcode",
+					"type": "streetcode"
+				},
+				{
+					"name": "extrcode",
+					"type": "extrcode"
+				},
+				{
+					"name": "sextcode",
+					"type": "sextcode"
+				},
+				{
+					"name": "offname",
+					"type": "offname"
+				},
+				{
+					"name": "postalcode",
+					"type": "postalcode"
+				},
+				{
+					"name": "ifnsfl",
+					"type": "ifnsfl"
+				},
+				{
+					"name": "terrifnsfl",
+					"type": "terrifnsfl"
+				},
+				{
+					"name": "ifnsul",
+					"type": "ifnsul"
+				},
+				{
+					"name": "terrifnsul",
+					"type": "terrifnsul"
+				},
+				{
+					"name": "okato",
+					"type": "okato"
+				},
+				{
+					"name": "oktmo",
+					"type": "oktmo"
+				},
+				{
+					"name": "updatedate",
+					"type": "updatedate"
+				},
+				{
+					"name": "shortname",
+					"type": "shortname"
+				},
+				{
+					"name": "aolevel",
+					"type": "aolevel"
+				},
+				{
+					"name": "parentguid",
+					"type": "parentguid"
+				},
+				{
+					"name": "aoid",
+					"type": "aoid"
+				},
+				{
+					"name": "previd",
+					"type": "previd"
+				},
+				{
+					"name": "nextid",
+					"type": "nextid"
+				},
+				{
+					"name": "code",
+					"type": "code"
+				},
+				{
+					"name": "plaincode",
+					"type": "plaincode"
+				},
+				{
+					"name": "actstatus",
+					"type": "actstatus"
+				},
+				{
+					"name": "livestatus",
+					"type": "livestatus"
+				},
+				{
+					"name": "centstatus",
+					"type": "centstatus"
+				},
+				{
+					"name": "operstatus",
+					"type": "operstatus"
+				},
+				{
+					"name": "currstatus",
+					"type": "currstatus"
+				},
+				{
+					"name": "startdate",
+					"type": "startdate"
+				},
+				{
+					"name": "enddate",
+					"type": "enddate"
+				},
+				{
+					"name": "normdoc",
+					"type": "normdoc"
+				},
+				{
+					"name": "cadnum",
+					"type": "cadnum"
+				},
+				{
+					"name": "divtype",
+					"type": "divtype"
+				},
+				{
+					"name": "fulladdress",
+					"type": "fulladdress"
+				},
+				{
+					"name": "fulladdress_search",
+					"type": "fulladdress_search"
+				}
+			]
+		},
+		{
+			"name": "rdev___sync_nodes_receiver",
+			"virtual": "No",
+			"displayName": "Узлы синхронизации (Приемники данных)",
+			"description": "Узлы синхронизации (Приемники данных)",
+			"fields": [
+				{
+					"name": "SyncHost",
+					"type": "SyncHost"
+				},
+				{
+					"name": "SyncTable",
+					"type": "SyncTable"
+				},
+				{
+					"name": "Filter",
+					"type": "SysString",
+					"displayName": "Фильтр"
+				}
+			]
+		},
+		{
+			"name": "rdev___history",
+			"displayName": "Архив изменений",
+			"description": "Содержит записи о изменениях записей в указанных таблицах",
+			"fields": [
+				{
+					"name": "recname",
+					"displayName": "Имя таблицы"
+				},
+				{
+					"name": "record_id",
+					"type": "SysGUID",
+					"displayName": "Идентификатор записи в указанной таблице"
+				},
+				{
+					"name": "record_state",
+					"type": "SysInt",
+					"displayName": "Статус записи по идентификатору записи в указанной таблице"
+				},
+				{
+					"name": "record_data",
+					"type": "SysString",
+					"displayName": "Данные по идентификатору записи в указанной таблице в формате JSON"
+				},
+				{
+					"name": "reccreated",
+					"displayName": "Метка времени действия по записи в указанной таблице"
+				}
+			]
+		},
+		{
+			"name": "RDEV___Auth_Privileges",
+			"virtual": "No",
+			"displayName": "Привилегии",
+			"description": "Привилегии профилей",
+			"fields": [
+				{
+					"name": "RecName",
+					"displayName": "Наименование"
+				},
+				{
+					"name": "Label",
+					"type": "SysString",
+					"displayName": "Отображаемое наименование"
+				},
+				{
+					"name": "RecDescription",
+					"displayName": "Описание"
+				},
+				{
+					"name": "IsEnabled",
+					"type": "SysBoolean",
+					"displayName": "Активно"
+				}
+			]
+		},
+		{
+			"name": "RDEV___Auth_Privilege_Role",
+			"virtual": "No",
+			"displayName": "Связь привилегия - роль",
+			"description": "Связь привилегия - роль",
+			"fields": [
+				{
+					"name": "PrivilegeId",
+					"type": "AuthPrivilege",
+					"displayName": "Привилегия"
+				},
+				{
+					"name": "RoleId",
+					"type": "AuthRole",
+					"displayName": "Роль"
+				}
+			]
+		},
+		{
+			"name": "RDEV___Auth_Privilege_Permissions",
+			"virtual": "No",
+			"displayName": "Разрешения для привелегий",
+			"description": "Разрешения для привелегий",
+			"fields": [
+				{
+					"name": "ObjectName",
+					"type": "SysString",
+					"displayName": "Наименование объекта"
+				},
+				{
+					"name": "ObjectType",
+					"type": "SysInt",
+					"displayName": "Тип объекта"
+				},
+				{
+					"name": "AccessLevel",
+					"type": "SysInt",
+					"displayName": "Уровень доступа"
+				},
+				{
+					"name": "PrivilegeId",
+					"type": "AuthPrivilege",
+					"displayName": "Ссылка на привилегию"
+				}
+			]
+		},
+		{
+			"name": "RDEV___Auth_DataPolicies",
+			"virtual": "No",
+			"displayName": "Политики данных",
+			"description": "Политики данных",
+			"fields": [
+				{
+					"name": "Recname",
+					"displayName": "Наименование"
+				},
+				{
+					"name": "Label",
+					"type": "SysString",
+					"displayName": "Отображаемое наименование"
+				},
+				{
+					"name": "RecDescription",
+					"displayName": "Описание"
+				},
+				{
+					"name": "IsEnabled",
+					"type": "SysBoolean",
+					"displayName": "Активно"
+				}
+			]
+		},
+		{
+			"name": "RDEV___Auth_DataPolicy_Role",
+			"virtual": "No",
+			"displayName": "Связь политика данных - роль",
+			"description": "Связь политика данных - роль",
+			"fields": [
+				{
+					"name": "DataPolicyId",
+					"type": "AuthDataPolicy",
+					"displayName": "Политика данных"
+				},
+				{
+					"name": "RoleId",
+					"type": "AuthRole",
+					"displayName": "Роль"
+				}
+			]
+		},
+		{
+			"name": "RDEV___Auth_DataPolicy_Restrictions",
+			"virtual": "No",
+			"displayName": "Ограничения политики данных",
+			"description": "Ограничения политики данных",
+			"fields": [
+				{
+					"name": "Query",
+					"type": "SysString",
+					"displayName": "Запрос"
+				},
+				{
+					"name": "SqlQuery",
+					"type": "SysString",
+					"displayName": "SQL Запрос"
+				},
+				{
+					"name": "AccessLevel",
+					"type": "SysInt",
+					"displayName": "Уровень доступа"
+				},
+				{
+					"name": "DataPolicyId",
+					"type": "AuthDataPolicy",
+					"displayName": "Ссылка на политику данных"
+				}
+			]
+		},
+		{
+			"name": "RDEV___Auth_DataPolicy_Objects",
+			"virtual": "No",
+			"displayName": "Объекты политики данных",
+			"description": "Объекты политики данных",
+			"fields": [
+				{
+					"name": "ObjectName",
+					"type": "SysString",
+					"displayName": "Наименование объекта"
+				},
+				{
+					"name": "ObjectType",
+					"type": "SysInt",
+					"displayName": "Тип объекта"
+				},
+				{
+					"name": "ParentTableName",
+					"type": "SysString",
+					"displayName": "Наименование родительской таблицы"
+				},
+				{
+					"name": "DataPolicyId",
+					"type": "AuthDataPolicy",
+					"displayName": "Ссылка на политику данных"
+				}
+			]
+		}
+	]
+}
